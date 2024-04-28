@@ -1,5 +1,5 @@
-#ifndef TREESPLITTER_H
-#define TREESPLITTER_H
+#ifndef EXPRPARSER_H
+#define EXPRPARSER_H
 
 #include <string>
 #include <utility>
@@ -36,7 +36,7 @@ std::vector<Operation> get_operations(const std::string& expression);
 
 /**
  * Converts an operation char into its priority: 
- * 0 for '+', ',' 
+ * 0 for '+', '-' 
  * 1 for '*', '/' 
  *
  * @param c The char of the operation.
@@ -44,4 +44,4 @@ std::vector<Operation> get_operations(const std::string& expression);
  */
 int char_to_priority(const char c);
 
-#endif  //TREESPLITTER_H
+#endif  //EXPRPARSER_H
