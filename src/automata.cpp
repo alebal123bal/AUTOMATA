@@ -1,4 +1,5 @@
 #include <iostream>
+//Please debug with the button at the bottom 
 #include "automata.hpp"
 
 // Define the global variable
@@ -9,6 +10,7 @@ std::string expression = "((3 * x**2 - 2 * x * y + y) / ((x - y)**2)) / "
 
 int main() {
     // Print the string
+    std::vector<Parenthesis> p = get_parentheses(expression);
     std::cout << "The expression is: \n" << expression << std::endl;
 
     return 0;

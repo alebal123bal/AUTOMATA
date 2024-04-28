@@ -3,6 +3,9 @@
 
 #include <string>
 
+#include "tree_splitter.hpp"
+#include "parenthesis.hpp"
+
 // Declare the external global variable (declaration)
 extern std::string expression;
 

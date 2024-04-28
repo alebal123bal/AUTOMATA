@@ -26,4 +26,4 @@ set(SOURCES
 add_executable(automata ${SOURCES})
 
 # Optionally set verbose makefile to help debugging of build issues
-set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_VERBOSE_MAKEFILE OFF)
