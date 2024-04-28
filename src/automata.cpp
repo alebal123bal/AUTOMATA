@@ -10,8 +10,9 @@ std::string expression = "((3 * x**2 - 2 * x * y + y) / ((x - y)**2)) / "
 
 int main() {
     // Print the string
-    std::vector<Parenthesis> p = get_parentheses(expression);
+    expression = strip_whitespace(expression);
     std::cout << "The expression is: \n" << expression << std::endl;
+    std::vector<Parenthesis> p = get_parentheses(expression);
 
     return 0;
 }

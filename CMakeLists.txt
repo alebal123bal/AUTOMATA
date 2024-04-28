@@ -18,7 +18,7 @@ set(SOURCES
     ${CMAKE_SOURCE_DIR}/src/basic_types/parenthesis.cpp
     ${CMAKE_SOURCE_DIR}/src/basic_types/token.cpp
 
-    ${CMAKE_SOURCE_DIR}/src/binary_tree/tree_splitter.cpp
+    ${CMAKE_SOURCE_DIR}/src/parsing/expr_parser.cpp
 
 )
 
@@ -26,4 +26,4 @@ set(SOURCES
 add_executable(automata ${SOURCES})
 
 # Optionally set verbose makefile to help debugging of build issues
-set(CMAKE_VERBOSE_MAKEFILE OFF)
+set(CMAKE_VERBOSE_MAKEFILE ON)

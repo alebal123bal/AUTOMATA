@@ -9,6 +9,7 @@ private:
     std::pair<int, int> position;
     int depth;
     int priority;
+    // Add std::string expression
 
 public:
     Operation();
@@ -22,7 +23,7 @@ public:
     
     int getPriority() const; 
     void setPriority(int priority);
-    
+
     void display() const;
 };
 
