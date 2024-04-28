@@ -1,0 +1,57 @@
+# Ignore build folders
+build/
+out/
+Release/
+Debug/
+x64/
+bin/
+obj/
+lib/
+
+# CMake specific files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+*.cmake
+
+# Ignore Visual Studio specific files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.opendb
+*.VC.db
+ipch/
+*.aps
+*.ncb
+*.suo
+*.user
+*.userosscache
+*.sdf
+*.pdb
+*.idb
+*.ilk
+*.log
+*.tlog
+*.vs/
+*.vscode/
+
+# Object files and archives
+*.o
+*.obj
+*.a
+*.lib
+*.dll
+*.exe
+*.so
+*.dylib
+
+# Backup & system files
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore specific files or directories
+# specific_file.txt
+# specific_folder/
