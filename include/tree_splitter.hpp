@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "parenthesis.hpp"
+#include "operation.hpp"
 
 
 /**
@@ -24,6 +25,6 @@ std::vector<Parenthesis> get_parentheses(const std::string& expression);
  * @return A vector of pairs, where each pair consists of the operation depth and the operation priority.
  */
 //TODO: Create a class for Operations with position and priority
-std::vector<std::pair<int, int>> get_operation_status(const std::string& expression);
+std::vector<Operation> get_operations(const std::string& expression);
 
 #endif  //TREESPLITTER_H
