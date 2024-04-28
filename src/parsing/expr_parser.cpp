@@ -64,7 +64,8 @@ std::vector<Operation> get_operations(const std::string& expression) {
                 curr_prio = char_to_priority(c);
             }
             else{
-                //Check if the current priority is different than the old: case of e.g. 5*-R1
+                // Check if the current priority is different than the old: case of e.g. 5*-R1
+                // This is not allowed at the moment
                 if (curr_prio != char_to_priority(c)){
                     // End the operations sequence
                     curr_end = i-1;
