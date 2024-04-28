@@ -15,8 +15,8 @@
  * to subdivide the expressio and populate the binary tree
  *
  * @param o The std::vector<Operation>& containing all the found Operations.
- * @return <start, end> where to break the expression
+ * @return vec<start, end> where to break the expression in a BFS way
  */
-std::pair<int, int> get_dominant_op(const std::vector<Operation>& o);
+std::vector<std::pair<int, int>> get_dominant_op(const std::vector<Operation>& o);
 
 #endif  //TREESPLITTER_H
