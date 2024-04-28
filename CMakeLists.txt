@@ -1,12 +1,29 @@
-cmake_minimum_required(VERSION 3.10)  # Specify the minimum version of CMake
+cmake_minimum_required(VERSION 3.10)
+project(Automata VERSION 1.0)
 
-project(Automata VERSION 1.0)  # Project name and version
-
-set(CMAKE_CXX_STANDARD 17)  # Use C++17 standard
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-include_directories(include)  # Include the directory for header files
+# It's good practice to specify the binary and source directories explicitly
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-file(GLOB_RECURSE SOURCES "src/*.cpp")  # Recursively find all .cpp files in src/
+# Include directories
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
-add_executable(automata ${SOURCES})  # Create an executable named automata
+# Automatically add all source files from the src directory
+set(SOURCES 
+    ${CMAKE_SOURCE_DIR}/src/automata.cpp
+
+    ${CMAKE_SOURCE_DIR}/src/basic_types/operation.cpp 
+    ${CMAKE_SOURCE_DIR}/src/basic_types/parenthesis.cpp
+    ${CMAKE_SOURCE_DIR}/src/basic_types/token.cpp
+
+    ${CMAKE_SOURCE_DIR}/src/binary_tree/tree_splitter.cpp
+
+)
+
+# Add executable
+add_executable(automata ${SOURCES})
+
+# Optionally set verbose makefile to help debugging of build issues
+set(CMAKE_VERBOSE_MAKEFILE ON)
