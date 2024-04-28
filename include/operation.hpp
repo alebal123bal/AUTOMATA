@@ -9,11 +9,11 @@ private:
     std::pair<int, int> position;
     int depth;
     int priority;
-    // Add std::string expression
+    std::string value;
 
 public:
     Operation();
-    Operation(int start, int end, int depth, int priority);
+    Operation(int start, int end, int depth, int priority, std::string value);
     
     std::pair<int, int> getPosition() const;
     void setPosition(int start, int end);
@@ -23,6 +23,9 @@ public:
     
     int getPriority() const; 
     void setPriority(int priority);
+
+    std::string getValue() const; 
+    void setValue(std::string newValue);
 
     void display() const;
 };

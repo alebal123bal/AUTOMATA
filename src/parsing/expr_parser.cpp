@@ -61,6 +61,7 @@ std::vector<Operation> get_operations(const std::string& expression) {
             if(lock_sequence == false){
                 curr_start = i;
                 lock_sequence = true;
+                curr_prio = char_to_priority(c);
             }
             else{
                 //Check if the current priority is different than the old: case of e.g. 5*-R1
@@ -68,7 +69,7 @@ std::vector<Operation> get_operations(const std::string& expression) {
                     // End the operations sequence
                     curr_end = i-1;
                     // Create Operation object
-                    operation_vec.push_back(Operation(curr_start, curr_end, curr_depth, curr_prio));
+                    operation_vec.push_back(Operation(curr_start, curr_end, curr_depth, curr_prio, expression.substr(curr_start, curr_end - curr_start + 1)));
                     // Update current selection
                     curr_start = i;
                     curr_prio = char_to_priority(c);
@@ -85,14 +86,18 @@ std::vector<Operation> get_operations(const std::string& expression) {
                 curr_depth--;
             }
 
-            // CHekc if an operation sequence was pending
+            // Check if an operation sequence was pending
             if(lock_sequence == true){
                 // Release the lock
                 lock_sequence = false;
                 // End the operations sequence
                 curr_end = i-1;
+                //If it had a priority of 1 (it is a *) and a len of 2, then it's a power
+                if(curr_prio == 1 and curr_end - curr_start == 1){
+                    curr_prio = 2;
+                }
                 // Create Operation object
-                operation_vec.push_back(Operation(curr_start, curr_end, curr_depth, curr_prio));
+                operation_vec.push_back(Operation(curr_start, curr_end, curr_depth, curr_prio, expression.substr(curr_start, curr_end - curr_start + 1)));
             }
         }
     }
