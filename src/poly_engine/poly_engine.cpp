@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <algorithm>
 
 struct Monomial {
     double coefficient;
@@ -14,6 +15,10 @@ struct Monomial {
             return exponents.size() < other.exponents.size();
         }
         return exponents < other.exponents;
+    }
+
+    bool operator==(const Monomial& other) const {
+        return (coefficient == other.coefficient) && (exponents == other.exponents);
     }
 };
 
@@ -39,6 +44,44 @@ public:
         }
     }
 
+    // Addition of polynomial fractions
+    MultivariablePolynomial operator+(const MultivariablePolynomial& other) {
+        MultivariablePolynomial result;
+
+        // Direct addition if denominators are the same
+        if (this->den_terms == other.den_terms) {
+            for (auto& term : this->num_terms) {
+                result.num_addMonomial(term.second, term.first.exponents);
+            }
+            for (auto& term : other.num_terms) {
+                result.num_addMonomial(term.second, term.first.exponents);
+            }
+            result.den_terms = this->den_terms; // Copy any denominator since they are the same
+        } else {
+            // LCM of denominators needed, simplified approach: multiply the denominators
+            for (auto& this_term : this->num_terms) {
+                for (auto& other_den_term : other.den_terms) {
+                    std::vector<int> new_exponents = max_exponents(this_term.first.exponents, other_den_term.first.exponents);
+                    result.num_addMonomial(this_term.second * other_den_term.second, new_exponents);
+                }
+            }
+            for (auto& other_term : other.num_terms) {
+                for (auto& this_den_term : this->den_terms) {
+                    std::vector<int> new_exponents = max_exponents(other_term.first.exponents, this_den_term.first.exponents);
+                    result.num_addMonomial(other_term.second * this_den_term.second, new_exponents);
+                }
+            }
+            for (auto& this_den : this->den_terms) {
+                for (auto& other_den : other.den_terms) {
+                    std::vector<int> new_exponents = max_exponents(this_den.first.exponents, other_den.first.exponents);
+                    result.den_addMonomial(this_den.second * other_den.second, new_exponents);
+                }
+            }
+        }
+
+        return result;
+    }
+
     void print() const {
         printTerms(num_terms);
         if (den_terms.size() == 1 && den_terms.begin()->first.exponents.empty() && den_terms.begin()->second == 1.0) {
@@ -56,6 +99,7 @@ private:
             return;
         }
         bool first = true;
+        static const char* var_names[] = {"x", "y", "z"}; // Extend this as needed
         for (const auto& pair : terms) {
             if (!first) {
                 std::cout << " + ";
@@ -69,23 +113,38 @@ private:
                     if (!firstVar) {
                         std::cout << " * ";
                     }
-                    std::cout << "x_" << i << "^" << pair.first.exponents[i];
+                    std::cout << var_names[i] << "^" << pair.first.exponents[i];
                     firstVar = false;
                 }
             }
         }
     }
+
+    std::vector<int> max_exponents(const std::vector<int>& a, const std::vector<int>& b) const {
+        std::vector<int> result(std::max(a.size(), b.size()), 0);
+        for (size_t i = 0; i < result.size(); ++i) {
+            int exp_a = i < a.size() ? a[i] : 0;
+            int exp_b = i < b.size() ? b[i] : 0;
+            result[i] = std::max(exp_a, exp_b);
+        }
+        return result;
+    }
 };
 
 int main() {
-    MultivariablePolynomial poly;
-    poly.num_addMonomial(3.5, {2, 1});  // 3.5 * x^2 * y^1
-    poly.num_addMonomial(-2.0, {0, 3}); // -2.0 * y^3
-    poly.num_addMonomial(1.0, {1, 0});  // 1.0 * x^1
+    MultivariablePolynomial poly1;
+    poly1.num_addMonomial(3.5, {2, 1});  // 3.5 * x^2 * y^1
+    poly1.num_addMonomial(-2.0, {0, 3}); // -2.0 * y^3
+    poly1.num_addMonomial(1.0, {1, 0});  // 1.0 * x^1
+    poly1.den_addMonomial(1.0, {0, 0});  // Unity
 
-    poly.den_addMonomial(1.0, {0, 0});  // Unity
+    MultivariablePolynomial poly2;
+    poly2.num_addMonomial(2.0, {0, 1});  // 2.0 * y^1
+    poly2.num_addMonomial(1.0, {2, 0});  // 1.0 * x^2
+    poly2.den_addMonomial(1.0, {0, 0});  // Unity
 
-    poly.print();
+    MultivariablePolynomial result = poly1 + poly2;
+    result.print();
     std::cout << std::endl;
     return 0;
 }
