@@ -13,6 +13,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 # Automatically add all source files from the src directory
 set(SOURCES 
     ${CMAKE_SOURCE_DIR}/src/automata.cpp
+    ${CMAKE_SOURCE_DIR}/src/poly_engine/poly_engine.cpp
 
     ${CMAKE_SOURCE_DIR}/src/basic_types/operation.cpp 
     ${CMAKE_SOURCE_DIR}/src/basic_types/parenthesis.cpp
