@@ -22,6 +22,10 @@ struct Monomial {
     }
 };
 
+//TODO: copy the MultivariablePolynomialFraction class
+//into MultivariablePolynomial 
+//with the same functions but of course without the denominator problems
+
 class MultivariablePolynomialFraction {
 private:
     std::map<Monomial, double> num_terms;  // Map monomials to coefficients for unique identification
@@ -58,6 +62,8 @@ public:
             }
             result.den_terms = this->den_terms; // Copy any denominator since they are the same
         } else {
+            //TODO: this 'else' is completely wrong;
+            //need to wait for MultivariablePolynomial class to be available
             // LCM of denominators needed, simplified approach: multiply the denominators
             for (auto& this_term : this->num_terms) {
                 for (auto& other_den_term : other.den_terms) {
