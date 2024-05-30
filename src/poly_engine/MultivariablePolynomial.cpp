@@ -21,6 +21,23 @@ MultivariablePolynomial MultivariablePolynomial::operator+(const MultivariablePo
     return result;
 }
 
+MultivariablePolynomial MultivariablePolynomial::operator-(const MultivariablePolynomial& other) {
+    MultivariablePolynomial result;
+    //TODO
+    return result;
+}
+
+MultivariablePolynomial MultivariablePolynomial::operator*(const MultivariablePolynomial& other) {
+    MultivariablePolynomial result;
+    //TODO
+    return result;
+}
+
+MultivariablePolynomial MultivariablePolynomial::operator/(const MultivariablePolynomial& other) {
+    MultivariablePolynomial result;
+    //TODO
+    return result;
+}
 void MultivariablePolynomial::print() const {
     printTerms(terms);
 }
