@@ -15,6 +15,7 @@ set(SOURCES
     ${CMAKE_SOURCE_DIR}/src/automata.cpp
     ${CMAKE_SOURCE_DIR}/src/poly_engine/poly_engine.cpp
     ${CMAKE_SOURCE_DIR}/src/poly_engine/Monomial.cpp
+    ${CMAKE_SOURCE_DIR}/src/poly_engine/MultivariablePolynomial.cpp
     ${CMAKE_SOURCE_DIR}/src/poly_engine/MultivariablePolynomialFraction.cpp
 
     ${CMAKE_SOURCE_DIR}/src/basic_types/operation.cpp 
