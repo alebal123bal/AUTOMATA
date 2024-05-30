@@ -4,6 +4,7 @@
 #include <cmath> // For fabs
 #include <algorithm>
 
+//This is to define the poly one Monomial at a time
 void MultivariablePolynomial::addMonomial(double coefficient, const std::vector<int>& exponents) {
     Monomial m(coefficient, exponents);
     terms[m] += coefficient;
