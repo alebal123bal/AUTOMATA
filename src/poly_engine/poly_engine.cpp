@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include "Monomial.h"
+#include "MultivariablePolynomial.h"
 #include "MultivariablePolynomialFraction.h"
 
 //TODO: copy the MultivariablePolynomialFraction class

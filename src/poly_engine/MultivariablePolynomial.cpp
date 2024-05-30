@@ -10,6 +10,8 @@ void MultivariablePolynomial::addMonomial(double coefficient, const std::vector<
     if (fabs(terms[m]) < 0.00001) {
         terms.erase(m);
     }
+    //TODO
+    return;
 }
 
 MultivariablePolynomial MultivariablePolynomial::operator+(const MultivariablePolynomial& other) {
