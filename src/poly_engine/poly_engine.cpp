@@ -30,6 +30,11 @@ int main() {
     bool multiplicationPassed = testMultiplication();
     bool divisionPassed = testDivision();
 
+    Monomial mono1(10.0, {5, 6});
+    Monomial mono2(-3, {});
+    mono1.print();
+    mono2.print();
+
     // Return non-zero if any tests fail
     return (additionPassed && subtractionPassed && multiplicationPassed && divisionPassed) ? 0 : 1;
 }

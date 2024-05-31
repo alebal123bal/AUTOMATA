@@ -17,6 +17,8 @@ struct Monomial {
     Monomial operator/(const Monomial& other);
 
     bool operator==(const Monomial& other);
+
+    void print() const;
 };
 
 #endif // MONOMIAL_H
