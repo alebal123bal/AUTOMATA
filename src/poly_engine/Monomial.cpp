@@ -5,6 +5,10 @@ Monomial::Monomial() : coefficient(1.0), exponents({}) {}  // Default constructo
 
 Monomial::Monomial(double coeff, const std::vector<int>& exps) : coefficient(coeff), exponents(exps) {}
 
+//These operators can only return another Monomial, i.e. trying to add monomials with different terms, that
+//would create a Polynomial, will fail.
+//Same goes for division, as a division with a "bigger" Monomial would lead to a fractional Monomial.
+
 Monomial Monomial::operator+(const Monomial& other) {
     // Check if the exponents are the same
     if (this->exponents == other.exponents) {
@@ -30,12 +34,40 @@ Monomial Monomial::operator-(const Monomial& other) {
 }
 
 Monomial Monomial::operator*(const Monomial& other) {
-    //TODO: Implement multiplication logic
-    return Monomial(); // Return default Monomial (unity) for now
+    // Multiply the coefficients
+    double newCoefficient = this->coefficient * other.coefficient;
+
+    // Add the exponents; vectors are of the same length
+    std::vector<int> newExponents(this->exponents.size(), 0);
+
+    for (size_t i = 0; i < this->exponents.size(); ++i) {
+        newExponents[i] = this->exponents[i] + other.exponents[i];  // Directly add corresponding exponents
+    }
+
+    return Monomial(newCoefficient, newExponents);
 }
 
 Monomial Monomial::operator/(const Monomial& other) {
-    //TODO: Implement division logic
+    //Implement division logic: only if this Monomial exponent element is bigger you can subtract; otherwise
+    //return an error, as it would get a negative exponent, i.e. a fractional Monomial
+
+    // Divide the coefficients
+    double newCoefficient = this->coefficient / other.coefficient;
+
+    // Sub the exponents; vectors are of the same length
+    std::vector<int> newExponents(this->exponents.size(), 0);
+
+    for (size_t i = 0; i < this->exponents.size(); ++i) {
+        if (this->exponents[i] >= other.exponents[i]){
+            newExponents[i] = this->exponents[i] - other.exponents[i];  // Sub corresponding exponents
+        }
+        else{
+            std::cerr << "Error: Attempted to divide monomials with a bigger one." << std::endl;
+            return Monomial(0, {});  // Represents an invalid monomial state
+        }
+    }
+
+    return Monomial(newCoefficient, newExponents);
     return Monomial(); // Return default Monomial (unity) for now
 }
 

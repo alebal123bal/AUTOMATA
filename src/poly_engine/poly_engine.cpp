@@ -11,6 +11,8 @@
 //with the same functions but of course without the denominator problems
 extern bool testAddition();
 extern bool testSubtraction();
+extern bool testMultiplication();
+extern bool testDivision();
 
 int main() {
     // MultivariablePolynomial poly1;
@@ -25,9 +27,9 @@ int main() {
 
     bool additionPassed = testAddition();
     bool subtractionPassed = testSubtraction();
+    bool multiplicationPassed = testMultiplication();
+    bool divisionPassed = testDivision();
 
     // Return non-zero if any tests fail
-    return (additionPassed && subtractionPassed) ? 0 : 1;
-    std::cout << std::endl;
-    return 0;
+    return (additionPassed && subtractionPassed && multiplicationPassed && divisionPassed) ? 0 : 1;
 }

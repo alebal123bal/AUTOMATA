@@ -32,6 +32,38 @@ bool testSubtraction() {
     }
 }
 
+bool testMultiplication() {
+    Monomial mono1(4.0, {2, 3});
+    Monomial mono2(5.0, {1, 1});
+    Monomial expectedProduct(20.0, {3, 4});
+    Monomial resultProduct = mono1 * mono2;
+
+    if (resultProduct == expectedProduct) {
+        std::cout << "Multiplication test passed." << std::endl;
+        return true;
+    } else {
+        std::cout << "Multiplication test failed." << std::endl;
+        return false;
+    }
+}
+
+bool testDivision() {
+    Monomial mono1(10.0, {5, 6});
+    Monomial mono2(2.0, {3, 2});
+    Monomial expectedQuotient(5.0, {2, 4});
+    Monomial resultQuotient = mono1 / mono2;
+
+    if (resultQuotient == expectedQuotient) {
+        std::cout << "Division test passed." << std::endl;
+        return true;
+    } else {
+        std::cout << "Division test failed: Attempted to divide monomials with a bigger one." << std::endl;
+        return false;
+    }
+}
+
 // Declare the test functions so main.cpp can call them
 extern bool testAddition();
 extern bool testSubtraction();
+extern bool testMultiplication();
+extern bool testDivision();
