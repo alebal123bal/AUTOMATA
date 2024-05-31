@@ -38,3 +38,7 @@ Monomial Monomial::operator/(const Monomial& other) {
     //TODO: Implement division logic
     return Monomial(); // Return default Monomial (unity) for now
 }
+
+bool Monomial::operator==(const Monomial& other){
+    return (this->coefficient == other.coefficient) && (this->exponents == other.exponents);
+};
