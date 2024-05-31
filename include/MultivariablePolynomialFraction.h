@@ -19,7 +19,6 @@ public:
 
 private:
     void printTerms(const std::map<Monomial, double>& terms) const;
-    std::vector<int> max_exponents(const std::vector<int>& a, const std::vector<int>& b) const;
 };
 
 #endif // MULTIVARIABLE_POLYNOMIAL_FRACTION_H

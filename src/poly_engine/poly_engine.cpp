@@ -21,10 +21,13 @@ int main() {
     poly2.addMonomial(1.0, {2, 0});  // 1.0 * x^2
     poly2.addMonomial(1.0, {0, 1});  // y
 
-    Monomial mono1;
+    Monomial mono1(2.0, {1, 2});
+    Monomial mono2(3.0, {1, 2});
 
-    MultivariablePolynomial result = poly1 + poly2;
-    result.print();
+    Monomial mono_sum = mono1 + mono2;
+
+    //MultivariablePolynomial result = poly1 + poly2;
+    //result.print();
     std::cout << std::endl;
     return 0;
 }

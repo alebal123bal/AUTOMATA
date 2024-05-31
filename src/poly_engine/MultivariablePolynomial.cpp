@@ -6,11 +6,6 @@
 
 //This is to define the poly one Monomial at a time
 void MultivariablePolynomial::addMonomial(double coefficient, const std::vector<int>& exponents) {
-    Monomial m(coefficient, exponents);
-    terms[m] += coefficient;
-    if (fabs(terms[m]) < 0.00001) {
-        terms.erase(m);
-    }
     //TODO
     return;
 }
