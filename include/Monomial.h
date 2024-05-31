@@ -8,10 +8,13 @@ struct Monomial {
     double coefficient;
     std::vector<int> exponents;
 
+    Monomial(); // Default constructor
     Monomial(double coeff, const std::vector<int>& exps);
 
-    bool operator<(const Monomial& other) const;
-    bool operator==(const Monomial& other) const;
+    Monomial operator+(const Monomial& other);
+    Monomial operator-(const Monomial& other);
+    Monomial operator*(const Monomial& other);
+    Monomial operator/(const Monomial& other);
 };
 
 #endif // MONOMIAL_H

@@ -1,16 +1,25 @@
-// Monomial.cpp
 #include "Monomial.h"
-#include <algorithm> // Include if using any algorithm functions
+
+Monomial::Monomial() : coefficient(1.0), exponents({}) {}  // Default constructor initializes to unity
 
 Monomial::Monomial(double coeff, const std::vector<int>& exps) : coefficient(coeff), exponents(exps) {}
 
-bool Monomial::operator<(const Monomial& other) const {
-    if (exponents.size() != other.exponents.size()) {
-        return exponents.size() < other.exponents.size();
-    }
-    return exponents < other.exponents;
+Monomial Monomial::operator+(const Monomial& other) {
+    //TODO: Implement addition logic
+    return Monomial(); // Return default Monomial (unity) for now
 }
 
-bool Monomial::operator==(const Monomial& other) const {
-    return (coefficient == other.coefficient) && (exponents == other.exponents);
+Monomial Monomial::operator-(const Monomial& other) {
+    //TODO: Implement subtraction logic
+    return Monomial(); // Return default Monomial (unity) for now
+}
+
+Monomial Monomial::operator*(const Monomial& other) {
+    //TODO: Implement multiplication logic
+    return Monomial(); // Return default Monomial (unity) for now
+}
+
+Monomial Monomial::operator/(const Monomial& other) {
+    //TODO: Implement division logic
+    return Monomial(); // Return default Monomial (unity) for now
 }
