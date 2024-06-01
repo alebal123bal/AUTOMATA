@@ -26,6 +26,8 @@ public:
 
     void cleanup();
 
+    double eval(const std::vector<double>& values) const;
+
     void print() const;
 
 };

@@ -212,6 +212,21 @@ void MultivariablePolynomial::cleanup() {
 }
 
 
+double MultivariablePolynomial::eval(const std::vector<double>& values) const {
+        double result = 0.0;
+
+        for (const auto& monomial : monomialVec) {
+            double termValue = monomial.coefficient;
+            for (size_t i = 0; i < monomial.exponents.size(); ++i) {
+                termValue *= std::pow(values[i], monomial.exponents[i]); // values[i] raised to the exponent of the i-th variable
+            }
+            result += termValue;
+        }
+
+        return result;
+}
+
+
 void MultivariablePolynomial::print() const {
     if (monomialVec.empty()) {
         std::cout << "0";  // Print 0 for an empty polynomial
