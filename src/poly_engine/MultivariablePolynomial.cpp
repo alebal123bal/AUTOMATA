@@ -48,8 +48,27 @@ MultivariablePolynomial MultivariablePolynomial::operator+(const MultivariablePo
 
 
 MultivariablePolynomial MultivariablePolynomial::operator-(const MultivariablePolynomial& other) {
+    //Use the Monomial exponents vector as key and the Monomial coefficient as value
+    std::map<std::vector<int>, double> expToCoeffMap;
+
+    // Combine monomials from this polynomial
+    for (const auto& mono : monomialVec) {
+        expToCoeffMap[mono.exponents] += mono.coefficient;
+    }
+
+    // Combine monomials from the other polynomial
+    for (const auto& mono : other.monomialVec) {
+        expToCoeffMap[mono.exponents] -= mono.coefficient;
+    }
+
+    // Build the resulting polynomial
     MultivariablePolynomial result;
-    //TODO
+    for (const auto& pair : expToCoeffMap) {
+        if (pair.second != 0) {  // Ignore monomials with a coefficient of 0
+            result.addMonomial(pair.second, pair.first);
+        }
+    }
+
     return result;
 }
 
