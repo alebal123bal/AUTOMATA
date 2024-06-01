@@ -214,17 +214,19 @@ void MultivariablePolynomial::cleanup() {
 
 
 double MultivariablePolynomial::eval(const std::vector<double>& values) const {
-        double result = 0.0;
+    double result = 0.0;
 
-        for (const auto& monomial : monomialVec) {
-            double termValue = monomial.coefficient;
-            for (size_t i = 0; i < monomial.exponents.size(); ++i) {
-                termValue *= std::pow(values[i], monomial.exponents[i]); // values[i] raised to the exponent of the i-th variable
-            }
-            result += termValue;
-        }
+    // Check if the number of values matches the expected number of variables
+    if (!monomialVec.empty() && values.size() != monomialVec[0].exponents.size()) {
+        throw std::invalid_argument("Number of values does not match the number of variables in the polynomial.");
+    }
 
-        return result;
+    // Iterate over each monomial and use its eval method
+    for (const auto& monomial : monomialVec) {
+        result += monomial.eval(values);  // Utilize Monomial's eval function
+    }
+
+    return result;
 }
 
 

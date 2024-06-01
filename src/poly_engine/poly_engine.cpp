@@ -38,15 +38,15 @@ int main() {
 
     //Lets see how fast is this power
     MultivariablePolynomial p;
-    p.addMonomial(1, {0});  // Constant term: 1
     p.addMonomial(1, {1});  // Linear term: x
-    p.addMonomial(1, {2});  // Quadratic term: x^2
-    p.addMonomial(1, {3});  // Cubic term: x^3
+    p.addMonomial(1, {0, 1});  // Cubic term: y
+    p.print();
 
-    MultivariablePolynomial p_5 = p.pow(35);
+    //TODO: check this for more than one variable
+    MultivariablePolynomial p_5 = p.pow(2);
     p_5.print();
 
-    std::cout << p_5.eval({2.71});
+    std::cout << p_5.eval({2.71, 1});
 
     return 0;
 }
