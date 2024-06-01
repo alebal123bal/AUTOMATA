@@ -46,7 +46,7 @@ int main() {
     MultivariablePolynomial p_5 = p.pow(35);
     p_5.print();
 
-    std::cout << p_5.eval({2});
+    std::cout << p_5.eval({2.71});
 
     return 0;
 }
