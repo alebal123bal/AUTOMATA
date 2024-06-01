@@ -91,6 +91,7 @@ bool testPolynomialMultiplication() {
     }
 }
 
+
 bool testPolynomialPower() {
     // Create a simple polynomial, p(x) = 1 + x
     MultivariablePolynomial p;
@@ -105,21 +106,31 @@ bool testPolynomialPower() {
     expected_p_cubed.addMonomial(3, {2});  // 3x^2
     expected_p_cubed.addMonomial(1, {3});  // x^3
 
-    // Assert to check if the result matches the expected result
-    assert(p_cubed == expected_p_cubed);
+    // Check if the results match the expected results
+    if (!(p_cubed == expected_p_cubed)) {
+        std::cout << "Test failed: p(x)^3 did not match the expected polynomial." << std::endl;
+        return false;
+    }
 
     // Compute p(x)^0 = 1 (any polynomial to the zero power should be 1)
     MultivariablePolynomial p_zero = p.pow(0);
     MultivariablePolynomial expected_p_zero;
     expected_p_zero.addMonomial(1, {0});  // 1
 
-    assert(p_zero == expected_p_zero);
+    if (!(p_zero == expected_p_zero)) {
+        std::cout << "Test failed: p(x)^0 did not match the expected polynomial of 1." << std::endl;
+        return false;
+    }
 
     // Compute p(x)^1 = p(x) (any polynomial to the first power should be the polynomial itself)
     MultivariablePolynomial p_one = p.pow(1);
-    assert(p_one == p);
+    if (!(p_one == p)) {
+        std::cout << "Test failed: p(x)^1 did not match the original polynomial p(x)." << std::endl;
+        return false;
+    }
 
-    std::cout << "All power tests passed." << std::endl;
+    std::cout << "All Polynomial Power tests passed." << std::endl;
+    return true;
 }
 
 extern bool testPolynomialAddition();
