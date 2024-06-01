@@ -101,5 +101,4 @@ void Monomial::print() const {
             }
         }
     }
-    std::cout << std::endl;
 }

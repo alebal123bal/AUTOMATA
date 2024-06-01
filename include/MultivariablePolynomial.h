@@ -21,6 +21,8 @@ public:
     MultivariablePolynomial operator/(const MultivariablePolynomial& other);
     MultivariablePolynomial pow(int exponent) const;
 
+    bool operator==(const MultivariablePolynomial& other);
+
     void print() const;
 
 };
