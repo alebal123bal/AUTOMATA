@@ -24,6 +24,8 @@ public:
 
     bool operator==(const MultivariablePolynomial& other);
 
+    void cleanup();
+
     void print() const;
 
 };

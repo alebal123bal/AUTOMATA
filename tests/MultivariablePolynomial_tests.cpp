@@ -61,5 +61,36 @@ bool testPolynomialSubtraction() {
     }
 }
 
+bool testPolynomialMultiplication() {
+    // Create first polynomial 3x^2y + 2xy^3
+    MultivariablePolynomial poly1;
+    poly1.addMonomial(3, {2, 1});  // 3x^2y
+    poly1.addMonomial(2, {1, 3});  // 2xy^3
+
+    // Create second polynomial 5x^2y - 2xy^3
+    MultivariablePolynomial poly2;
+    poly2.addMonomial(5, {2, 1});  // 5x^2y
+    poly2.addMonomial(-2, {1, 3}); // -2xy^3
+
+    // Multiply the polynomials
+    MultivariablePolynomial result = poly1 * poly2;
+
+    // Expected result 15x^4y^2 + 4x^3y^4 - 4x^2y^6
+    MultivariablePolynomial expected;
+    expected.addMonomial(15, {4, 2}); // 15x^4y^2
+    expected.addMonomial(4, {3, 4});  // 4x^3y^4
+    expected.addMonomial(-4, {2, 6}); // -4x^2y^6
+
+    // Assert to check if the result matches the expected result
+    if (result == expected) {
+        std::cout << "MultivariablePolynomial Multiplication test passed." << std::endl;
+        return true;
+    } else {
+        std::cout << "MultivariablePolynomial Multiplication test failed." << std::endl;
+        return false;
+    }
+}
+
 extern bool testPolynomialAddition();
 extern bool testPolynomialSubtraction();
+extern bool testPolynomialMultiplication();

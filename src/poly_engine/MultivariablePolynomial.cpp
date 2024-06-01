@@ -74,7 +74,30 @@ MultivariablePolynomial MultivariablePolynomial::operator-(const MultivariablePo
 
 MultivariablePolynomial MultivariablePolynomial::operator*(const MultivariablePolynomial& other) {
     MultivariablePolynomial result;
-    //TODO
+
+    // Iterate over each monomial in the first polynomial
+    for (const auto& mono1 : monomialVec) {
+        // And each monomial in the second polynomial
+        for (const auto& mono2 : other.monomialVec) {
+            // Calculate the product of the coefficients
+            double newCoefficient = mono1.coefficient * mono2.coefficient;
+
+            // Calculate the new exponents by adding corresponding exponents
+            std::vector<int> newExponents;
+            newExponents.reserve(mono1.exponents.size());  // Assume sizes are the same and fixed
+
+            // Since the vector sizes are the same, we can sum directly
+            for (size_t i = 0; i < mono1.exponents.size(); ++i) {
+                newExponents.push_back(mono1.exponents[i] + mono2.exponents[i]);
+            }
+
+            // Add the new monomial to the result polynomial
+            result.addMonomial(newCoefficient, newExponents);
+        }
+    }
+
+    // After all products are added, combine like terms
+    result.cleanup();
     return result;
 }
 
@@ -122,6 +145,42 @@ bool MultivariablePolynomial::operator==(const MultivariablePolynomial& other){
     }
 
     return true;
+}
+
+
+void MultivariablePolynomial::cleanup() {
+    if (monomialVec.empty()) return;
+
+    // Sort monomials by their exponents
+    
+    std::sort(monomialVec.begin(), monomialVec.end(), [](const Monomial& a, const Monomial& b) {
+        return a.exponents < b.exponents;
+    });
+
+    // Combine like terms and remove small coefficients
+    std::vector<Monomial> cleanedVec;
+    Monomial current = monomialVec[0];
+    
+    for (size_t i = 1; i < monomialVec.size(); ++i) {
+        if (monomialVec[i].exponents == current.exponents) {
+            // Combine coefficients if exponents match
+            current.coefficient += monomialVec[i].coefficient;
+        } else {
+            // Push the previous term if its coefficient is significant
+            if (std::fabs(current.coefficient) >= MathConstants::EPSILON) {
+                cleanedVec.push_back(current);
+            }
+            current = monomialVec[i];  // Start a new term
+        }
+    }
+
+    // Don't forget to add the last processed term if significant
+    if (std::fabs(current.coefficient) >= MathConstants::EPSILON) {
+        cleanedVec.push_back(current);
+    }
+
+    // Replace the original vector with the cleaned version
+    monomialVec = std::move(cleanedVec);
 }
 
 
