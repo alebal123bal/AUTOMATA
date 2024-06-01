@@ -82,6 +82,10 @@ bool Monomial::operator==(const Monomial& other){
     return (this->coefficient == other.coefficient) && (this->exponents == other.exponents);
 };
 
+bool Monomial::hasEqualExponents(const Monomial& other) const {
+    return this->exponents == other.exponents;
+}
+
 void Monomial::print() const {
     std::cout << coefficient;
 

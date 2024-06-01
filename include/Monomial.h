@@ -18,6 +18,7 @@ struct Monomial {
     Monomial pow(int exponent) const;
 
     bool operator==(const Monomial& other);
+    bool hasEqualExponents(const Monomial& other) const;
 
     void print() const;
 };
