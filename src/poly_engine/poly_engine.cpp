@@ -18,6 +18,7 @@ extern bool testPow();
 extern bool testPolynomialAddition();
 extern bool testPolynomialSubtraction();
 extern bool testPolynomialMultiplication();
+extern bool testPolynomialPower();
 
 int main() {
     bool additionPassed = testAddition();
@@ -33,5 +34,7 @@ int main() {
     subtractionPassed = testPolynomialSubtraction();
     multiplicationPassed = testPolynomialMultiplication();
     
+    powerPassed = testPolynomialPower();
+
     return 0;
 }

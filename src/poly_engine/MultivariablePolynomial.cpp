@@ -108,9 +108,36 @@ MultivariablePolynomial MultivariablePolynomial::operator/(const MultivariablePo
     return result;
 }
 
-MultivariablePolynomial MultivariablePolynomial::pow(int exponent) const{
-    MultivariablePolynomial result;
-    //TODO
+MultivariablePolynomial MultivariablePolynomial::pow(int exponent) const {
+    if (exponent < 0) {
+        throw std::invalid_argument("Negative exponent is not supported for MultivariablePolynomials.\
+         Use MultivariablePolynomialsFraction instead");
+    }
+    if (exponent == 0) {
+        // Any non-zero number to the power of 0 is 1, we need to define what a "1" is for polynomials.
+        MultivariablePolynomial result;
+        result.addMonomial(1, std::vector<int>(this->monomialVec[0].exponents.size(), 0)); // Assuming exponents.size() > 0
+        return result;
+    }
+    if (exponent == 1) {
+        return *this;
+    }
+
+    MultivariablePolynomial result = *this;
+    MultivariablePolynomial base = *this;
+
+    // Start the exponentiation by squaring algorithm
+    result = MultivariablePolynomial();  // Reset result
+    result.addMonomial(1, std::vector<int>(base.monomialVec[0].exponents.size(), 0)); // Identity polynomial
+
+    while (exponent > 0) {
+        if (exponent % 2 == 1) {
+            result = result * base;  // Multiply result by base if exponent is odd
+        }
+        base = base * base;        // Square the base
+        exponent /= 2;             // Divide exponent by 2
+    }
+
     return result;
 }
 

@@ -91,6 +91,38 @@ bool testPolynomialMultiplication() {
     }
 }
 
+bool testPolynomialPower() {
+    // Create a simple polynomial, p(x) = 1 + x
+    MultivariablePolynomial p;
+    p.addMonomial(1, {0});  // Constant term: 1
+    p.addMonomial(1, {1});  // Linear term: x
+
+    // Compute p(x)^3 = (1 + x)^3 = 1 + 3x + 3x^2 + x^3
+    MultivariablePolynomial p_cubed = p.pow(3);
+    MultivariablePolynomial expected_p_cubed;
+    expected_p_cubed.addMonomial(1, {0});  // 1
+    expected_p_cubed.addMonomial(3, {1});  // 3x
+    expected_p_cubed.addMonomial(3, {2});  // 3x^2
+    expected_p_cubed.addMonomial(1, {3});  // x^3
+
+    // Assert to check if the result matches the expected result
+    assert(p_cubed == expected_p_cubed);
+
+    // Compute p(x)^0 = 1 (any polynomial to the zero power should be 1)
+    MultivariablePolynomial p_zero = p.pow(0);
+    MultivariablePolynomial expected_p_zero;
+    expected_p_zero.addMonomial(1, {0});  // 1
+
+    assert(p_zero == expected_p_zero);
+
+    // Compute p(x)^1 = p(x) (any polynomial to the first power should be the polynomial itself)
+    MultivariablePolynomial p_one = p.pow(1);
+    assert(p_one == p);
+
+    std::cout << "All power tests passed." << std::endl;
+}
+
 extern bool testPolynomialAddition();
 extern bool testPolynomialSubtraction();
 extern bool testPolynomialMultiplication();
+extern bool testPolynomialPower();
