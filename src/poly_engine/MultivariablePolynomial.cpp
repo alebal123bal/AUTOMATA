@@ -1,7 +1,7 @@
 // MultivariablePolynomial.cpp
 #include "MultivariablePolynomial.h"
 #include <iostream>
-#include <cmath> // For fabs
+#include <cmath>
 #include <algorithm>
 #include <map>
 
@@ -11,9 +11,10 @@ MultivariablePolynomial::MultivariablePolynomial() {
     //Do nothing
 }
 
-// Parametrized constructor
-MultivariablePolynomial::MultivariablePolynomial(const std::vector<Monomial>& monomials)
-    : monomialVec(monomials) {}  // Initialize the vector of monomials
+// Parametrized constructor: initialize the vector of monomials
+MultivariablePolynomial::MultivariablePolynomial(const std::vector<Monomial>& monomials): monomialVec(monomials) {
+    cleanup();
+}
 
 //This is to define the poly one Monomial at a time
 void MultivariablePolynomial::addMonomial(double coefficient, const std::vector<int>& exponents) {
