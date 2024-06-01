@@ -73,7 +73,36 @@ MultivariablePolynomial MultivariablePolynomial::pow(int exponent) const{
 
 
 bool MultivariablePolynomial::operator==(const MultivariablePolynomial& other){
-    return false;
+    // Check if they have the same number of monomials
+    if (monomialVec.size() != other.monomialVec.size()) {
+        return false;
+    }
+
+    // Since the order of monomials doesn't matter, we need to sort them first
+
+    //Define the lambda function for the std::sort algo
+    auto monomialSorter = [](const Monomial& a, const Monomial& b) {
+        if (a.exponents == b.exponents) {
+            return a.coefficient < b.coefficient;
+        }
+        return a.exponents < b.exponents;
+    };
+
+    std::vector<Monomial> sortedMonomials1 = monomialVec;
+    std::vector<Monomial> sortedMonomials2 = other.monomialVec;
+
+    std::sort(sortedMonomials1.begin(), sortedMonomials1.end(), monomialSorter);
+    std::sort(sortedMonomials2.begin(), sortedMonomials2.end(), monomialSorter);
+
+    // Compare sorted monomials one by one
+    for (size_t i = 0; i < sortedMonomials1.size(); ++i) {
+        // Use the Monomial's operator== which considers EPSILON for coefficients
+        if (!(sortedMonomials1[i] == sortedMonomials2[i])) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 

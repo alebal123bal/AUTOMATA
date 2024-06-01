@@ -15,7 +15,7 @@ extern bool testMultiplication();
 extern bool testDivision();
 extern bool testPow();
 
-extern void testPolynomialAddition();
+extern bool testPolynomialAddition();
 
 int main() {
     bool additionPassed = testAddition();

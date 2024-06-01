@@ -9,10 +9,10 @@ bool testAddition() {
     Monomial resultSum = mono1 + mono2;
 
     if (resultSum == expectedSum) {
-        std::cout << "Addition test passed." << std::endl;
+        std::cout << "Monomial Addition test passed." << std::endl;
         return true;
     } else {
-        std::cout << "Addition test failed." << std::endl;
+        std::cout << "Monomial Addition test failed." << std::endl;
         return false;
     }
 }
@@ -24,10 +24,10 @@ bool testSubtraction() {
     Monomial resultDiff = mono1 - mono2;
 
     if (resultDiff == expectedDiff) {
-        std::cout << "Subtraction test passed." << std::endl;
+        std::cout << "Monomial Subtraction test passed." << std::endl;
         return true;
     } else {
-        std::cout << "Subtraction test failed." << std::endl;
+        std::cout << "Monomial Subtraction test failed." << std::endl;
         return false;
     }
 }
@@ -39,10 +39,10 @@ bool testMultiplication() {
     Monomial resultProduct = mono1 * mono2;
 
     if (resultProduct == expectedProduct) {
-        std::cout << "Multiplication test passed." << std::endl;
+        std::cout << "Monomial Multiplication test passed." << std::endl;
         return true;
     } else {
-        std::cout << "Multiplication test failed." << std::endl;
+        std::cout << "Monomial Multiplication test failed." << std::endl;
         return false;
     }
 }
@@ -54,10 +54,10 @@ bool testDivision() {
     Monomial resultQuotient = mono1 / mono2;
 
     if (resultQuotient == expectedQuotient) {
-        std::cout << "Division test passed." << std::endl;
+        std::cout << "Monomial Division test passed." << std::endl;
         return true;
     } else {
-        std::cout << "Division test failed." << std::endl;
+        std::cout << "Monomial Division test failed." << std::endl;
         return false;
     }
 }
@@ -69,10 +69,10 @@ bool testPow() {
     Monomial expected(0.125, {-3, -6});  // Should be 8*x^3*y^6
 
     if (result == expected) {
-        std::cout << "Power test passed." << std::endl;
+        std::cout << "Monomial Power test passed." << std::endl;
         return true;
     } else {
-        std::cout << "Power test failed." << std::endl;
+        std::cout << "Monomial Power test failed." << std::endl;
         return false;
     }
 }
