@@ -62,8 +62,24 @@ bool testDivision() {
     }
 }
 
+bool testPow() {
+    Monomial mono(2.0, {1, 2});  // Represents 2*x*y^2
+    int exponent = -3;
+    Monomial result = mono.pow(exponent);
+    Monomial expected(0.125, {-3, -6});  // Should be 8*x^3*y^6
+
+    if (result == expected) {
+        std::cout << "Power test passed." << std::endl;
+        return true;
+    } else {
+        std::cout << "Power test failed." << std::endl;
+        return false;
+    }
+}
+
 // Declare the test functions so main.cpp can call them
 extern bool testAddition();
 extern bool testSubtraction();
 extern bool testMultiplication();
 extern bool testDivision();
+extern bool testPow();

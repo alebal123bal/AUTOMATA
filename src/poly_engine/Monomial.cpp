@@ -1,6 +1,7 @@
 #include "Monomial.h"
 #include <iostream>
 #include <algorithm>
+#include <cmath>
 
 Monomial::Monomial() : coefficient(1.0), exponents({}) {}  // Default constructor initializes to unity
 
@@ -63,6 +64,19 @@ Monomial Monomial::operator/(const Monomial& other) {
 
     return Monomial(newCoefficient, newExponents);
 }
+
+Monomial Monomial::pow(int exponent) const {
+    //Accept also negative exponents
+    double newCoefficient = std::pow(coefficient, exponent);
+    std::vector<int> newExponents;
+    
+    for (int exp : exponents) {
+        newExponents.push_back(exp * exponent); // Multiply each exponent by the power
+    }
+    
+    return Monomial(newCoefficient, newExponents);
+}
+
 
 bool Monomial::operator==(const Monomial& other){
     return (this->coefficient == other.coefficient) && (this->exponents == other.exponents);

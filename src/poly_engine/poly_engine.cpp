@@ -13,6 +13,7 @@ extern bool testAddition();
 extern bool testSubtraction();
 extern bool testMultiplication();
 extern bool testDivision();
+extern bool testPow();
 
 int main() {
     // MultivariablePolynomial poly1;
@@ -29,6 +30,7 @@ int main() {
     bool subtractionPassed = testSubtraction();
     bool multiplicationPassed = testMultiplication();
     bool divisionPassed = testDivision();
+    bool powerPassed = testPow();
 
     Monomial mono1(10.0, {5, 6});
     Monomial mono2(-3, {});
@@ -36,5 +38,5 @@ int main() {
     mono2.print();
 
     // Return non-zero if any tests fail
-    return (additionPassed && subtractionPassed && multiplicationPassed && divisionPassed) ? 0 : 1;
+    return (additionPassed && subtractionPassed && multiplicationPassed && divisionPassed && powerPassed) ? 0 : 1;
 }

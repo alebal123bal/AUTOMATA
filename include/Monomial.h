@@ -15,6 +15,7 @@ struct Monomial {
     Monomial operator-(const Monomial& other);
     Monomial operator*(const Monomial& other);
     Monomial operator/(const Monomial& other);
+    Monomial pow(int exponent) const;
 
     bool operator==(const Monomial& other);
 
