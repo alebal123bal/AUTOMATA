@@ -1,5 +1,6 @@
 // MultivariablePolynomial.cpp
 #include "MultivariablePolynomial.h"
+#include "GlobalConfig.h"
 #include <iostream>
 #include <cmath>
 #include <algorithm>

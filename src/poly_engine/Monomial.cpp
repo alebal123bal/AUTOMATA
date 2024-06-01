@@ -1,11 +1,16 @@
 #include "Monomial.h"
+#include "GlobalConfig.h"
 #include <iostream>
 #include <algorithm>
 #include <cmath>
 
-Monomial::Monomial() : coefficient(1.0), exponents({}) {}  // Default constructor initializes to unity
+Monomial::Monomial() : coefficient(1.0), exponents({}) {
+    
+}  // Default constructor initializes to unity
 
-Monomial::Monomial(double coeff, const std::vector<int>& exps) : coefficient(coeff), exponents(exps) {}
+Monomial::Monomial(double coeff, const std::vector<int>& exps) : coefficient(coeff), exponents(exps) {
+
+}
 
 //These operators can only return another Monomial, i.e. trying to add monomials with different terms, that
 //would create a Polynomial, will fail.
@@ -85,6 +90,20 @@ bool Monomial::operator==(const Monomial& other){
 
 bool Monomial::hasEqualExponents(const Monomial& other) const {
     return this->exponents == other.exponents;
+}
+
+
+double Monomial::eval(const std::vector<double>& values) const {
+    double result = coefficient; // Start with the coefficient
+    for (size_t i = 0; i < exponents.size(); ++i) {
+        if (i < values.size()) {
+            result *= std::pow(values[i], exponents[i]); // Multiply by each variable raised to its exponent
+        } else {
+            // Handle case where there are more exponents than values provided
+            throw std::invalid_argument("Insufficient values provided for the number of variables in Monomial.");
+        }
+    }
+    return result;
 }
 
 
