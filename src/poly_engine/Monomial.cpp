@@ -4,9 +4,10 @@
 #include <algorithm>
 #include <cmath>
 
-Monomial::Monomial() : coefficient(1.0), exponents({}) {
-
-}  // Default constructor initializes to unity
+// Implementation of the default Monomial constructor
+Monomial::Monomial() : coefficient(1.0), exponents(std::vector<int>(SYM_NUMBER, 0)) {
+    // The exponents vector is initialized with SYM_NUMBER elements, all set to 0
+}
 
 // Implementation of the Monomial constructor
 Monomial::Monomial(double coeff, const std::vector<int>& exps) : coefficient(coeff), exponents(exps) {
