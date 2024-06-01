@@ -95,16 +95,16 @@ bool testPolynomialMultiplication() {
 bool testPolynomialPower() {
     // Create a simple polynomial, p(x) = 1 + x
     MultivariablePolynomial p;
-    p.addMonomial(1, {0});  // Constant term: 1
-    p.addMonomial(1, {1});  // Linear term: x
+    p.addMonomial(1, {0, 0});  // Constant term: 1
+    p.addMonomial(1, {1, 0});  // Linear term: x
 
     // Compute p(x)^3 = (1 + x)^3 = 1 + 3x + 3x^2 + x^3
     MultivariablePolynomial p_cubed = p.pow(3);
     MultivariablePolynomial expected_p_cubed;
-    expected_p_cubed.addMonomial(1, {0});  // 1
-    expected_p_cubed.addMonomial(3, {1});  // 3x
-    expected_p_cubed.addMonomial(3, {2});  // 3x^2
-    expected_p_cubed.addMonomial(1, {3});  // x^3
+    expected_p_cubed.addMonomial(1, {0, 0});  // 1
+    expected_p_cubed.addMonomial(3, {1, 0});  // 3x
+    expected_p_cubed.addMonomial(3, {2, 0});  // 3x^2
+    expected_p_cubed.addMonomial(1, {3, 0});  // x^3
 
     // Check if the results match the expected results
     if (!(p_cubed == expected_p_cubed)) {
@@ -115,7 +115,7 @@ bool testPolynomialPower() {
     // Compute p(x)^0 = 1 (any polynomial to the zero power should be 1)
     MultivariablePolynomial p_zero = p.pow(0);
     MultivariablePolynomial expected_p_zero;
-    expected_p_zero.addMonomial(1, {0});  // 1
+    expected_p_zero.addMonomial(1, {0, 0});  // 1
 
     if (!(p_zero == expected_p_zero)) {
         std::cout << "Test failed: p(x)^0 did not match the expected polynomial of 1." << std::endl;

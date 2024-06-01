@@ -5,11 +5,15 @@
 #include <cmath>
 
 Monomial::Monomial() : coefficient(1.0), exponents({}) {
-    
+
 }  // Default constructor initializes to unity
 
+// Implementation of the Monomial constructor
 Monomial::Monomial(double coeff, const std::vector<int>& exps) : coefficient(coeff), exponents(exps) {
-
+    // Ensure the exponents vector has the correct size
+    if (exps.size() != SYM_NUMBER) {
+        throw std::invalid_argument("Incorrect number of exponents provided. Expected " + std::to_string(SYM_NUMBER) + ".");
+    }
 }
 
 //These operators can only return another Monomial, i.e. trying to add monomials with different terms, that
