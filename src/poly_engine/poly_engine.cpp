@@ -26,8 +26,10 @@ int main() {
     bool powerPassed = testPow();
 
     // Return non-zero if any tests fail
-    //return (additionPassed && subtractionPassed && multiplicationPassed && divisionPassed && powerPassed) ? 0 : 1;
-    testPolynomialAddition();
-    testPolynomialSubtraction();
+    bool Monomial_tests_passed = additionPassed && subtractionPassed && multiplicationPassed && divisionPassed && powerPassed;
+    
+    additionPassed = testPolynomialAddition();
+    subtractionPassed = testPolynomialSubtraction();
+    
     return 0;
 }

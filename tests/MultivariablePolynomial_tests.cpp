@@ -43,12 +43,12 @@ bool testPolynomialSubtraction() {
     poly2.addMonomial(5, {2, 1});  // 5x^2y
     poly2.addMonomial(-2, {1, 3}); // -2xy^3
 
-    // Expected result is 8x^2y
+    // Expected result is -2x^2y + 4xy^3
     MultivariablePolynomial expected;
     expected.addMonomial(-2, {2, 1}); // -2x^2y
     expected.addMonomial(4, {1, 3}); // 4xy^3
 
-    // Add the two polynomials
+    // Sub the two polynomials
     MultivariablePolynomial result = poly1 - poly2;
 
     // Test if the result matches the expected result
