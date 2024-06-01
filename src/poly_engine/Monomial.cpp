@@ -49,8 +49,7 @@ Monomial Monomial::operator*(const Monomial& other) {
 }
 
 Monomial Monomial::operator/(const Monomial& other) {
-    //Implement division logic: only if this Monomial exponent element is bigger you can subtract; otherwise
-    //return an error, as it would get a negative exponent, i.e. a fractional Monomial
+    //Implement division logic
 
     // Divide the coefficients
     double newCoefficient = this->coefficient / other.coefficient;
@@ -59,13 +58,7 @@ Monomial Monomial::operator/(const Monomial& other) {
     std::vector<int> newExponents(this->exponents.size(), 0);
 
     for (size_t i = 0; i < this->exponents.size(); ++i) {
-        if (this->exponents[i] >= other.exponents[i]){
-            newExponents[i] = this->exponents[i] - other.exponents[i];  // Sub corresponding exponents
-        }
-        else{
-            std::cerr << "Error: Attempted to divide monomials with a bigger one." << std::endl;
-            return Monomial(0, {});  // Represents an invalid monomial state
-        }
+        newExponents[i] = this->exponents[i] - other.exponents[i];  // Directly sub corresponding exponents
     }
 
     return Monomial(newCoefficient, newExponents);

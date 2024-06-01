@@ -57,7 +57,7 @@ bool testDivision() {
         std::cout << "Division test passed." << std::endl;
         return true;
     } else {
-        std::cout << "Division test failed: Attempted to divide monomials with a bigger one." << std::endl;
+        std::cout << "Division test failed." << std::endl;
         return false;
     }
 }
