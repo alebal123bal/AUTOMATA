@@ -17,6 +17,7 @@ set(SOURCES
     ${CMAKE_SOURCE_DIR}/src/poly_engine/MultivariablePolynomial.cpp
     ${CMAKE_SOURCE_DIR}/src/poly_engine/MultivariablePolynomialFraction.cpp
     ${CMAKE_SOURCE_DIR}/tests/Monomial_tests.cpp
+    ${CMAKE_SOURCE_DIR}/tests/MultivariablePolynomial_tests.cpp
 
     ${CMAKE_SOURCE_DIR}/src/automata.cpp
     ${CMAKE_SOURCE_DIR}/src/basic_types/operation.cpp 

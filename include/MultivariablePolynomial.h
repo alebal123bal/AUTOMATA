@@ -8,18 +8,21 @@
 
 class MultivariablePolynomial {
 private:
-    std::map<Monomial, double> terms;
+    std::vector<Monomial> monomialVec;
 
 public:
+    MultivariablePolynomial();  // Default constructor
+    MultivariablePolynomial(const std::vector<Monomial>& monomials);  // Parametrized constructor
+    
     void addMonomial(double coefficient, const std::vector<int>& exponents);
     MultivariablePolynomial operator+(const MultivariablePolynomial& other);
     MultivariablePolynomial operator-(const MultivariablePolynomial& other);
     MultivariablePolynomial operator*(const MultivariablePolynomial& other);
     MultivariablePolynomial operator/(const MultivariablePolynomial& other);
+    MultivariablePolynomial pow(int exponent) const;
+
     void print() const;
 
-private:
-    void printTerms(const std::map<Monomial, double>& terms) const;
 };
 
 #endif // MULTIVARIABLE_POLYNOMIAL_H
