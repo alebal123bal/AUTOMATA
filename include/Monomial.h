@@ -2,6 +2,7 @@
 #ifndef MONOMIAL_H
 #define MONOMIAL_H
 
+#include "MathConstants.h"
 #include <vector>
 
 struct Monomial {

@@ -8,8 +8,7 @@
 
 // Default constructor
 MultivariablePolynomial::MultivariablePolynomial() {
-    // Add a default Monomial unity (1.0 as coefficient and empty exponents vector)
-    monomialVec.push_back(Monomial(1.0, std::vector<int>{}));
+    //Do nothing
 }
 
 // Parametrized constructor
@@ -76,6 +75,7 @@ MultivariablePolynomial MultivariablePolynomial::pow(int exponent) const{
 bool MultivariablePolynomial::operator==(const MultivariablePolynomial& other){
     return false;
 }
+
 
 void MultivariablePolynomial::print() const {
     if (monomialVec.empty()) {

@@ -3,6 +3,7 @@
 #define MULTIVARIABLE_POLYNOMIAL
 
 #include "Monomial.h"
+#include "MathConstants.h"
 #include <map>
 #include <vector>
 
@@ -11,7 +12,7 @@ private:
     std::vector<Monomial> monomialVec;
 
 public:
-    MultivariablePolynomial();  // Default constructor
+    MultivariablePolynomial();  // Default constructor initialized empty
     MultivariablePolynomial(const std::vector<Monomial>& monomials);  // Parametrized constructor
     
     void addMonomial(double coefficient, const std::vector<int>& exponents);

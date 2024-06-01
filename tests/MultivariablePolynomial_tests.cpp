@@ -38,5 +38,7 @@ void testPolynomialAddition() {
     // Manual check if no operator== is defined
     // Here you could compare the internal structures if accessible or ensure the print outputs match expected values
 
-    std::cout << "Test completed." << std::endl; // Indicate test completion
+    std::cout << "Polynomial addition test completed." << std::endl; // Indicate test completion
 }
+
+extern void testPolynomialAddition();
