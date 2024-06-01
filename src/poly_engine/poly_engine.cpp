@@ -6,9 +6,6 @@
 #include "MultivariablePolynomial.h"
 #include "MultivariablePolynomialFraction.h"
 
-//TODO: copy the MultivariablePolynomialFraction class
-//into MultivariablePolynomial 
-//with the same functions but of course without the denominator problems
 extern bool testAddition();
 extern bool testSubtraction();
 extern bool testMultiplication();

@@ -106,6 +106,7 @@ MultivariablePolynomial MultivariablePolynomial::operator*(const MultivariablePo
 MultivariablePolynomial MultivariablePolynomial::operator/(const MultivariablePolynomial& other) {
     MultivariablePolynomial result;
     //TODO
+    //https://www.kristakingmath.com/blog/predator-prey-systems-ghtcp-5e2r4-427ab
     return result;
 }
 
