@@ -15,6 +15,7 @@ extern bool testPow();
 extern bool testPolynomialAddition();
 extern bool testPolynomialSubtraction();
 extern bool testPolynomialMultiplication();
+extern bool testPolynomialDivision();
 extern bool testPolynomialPower();
 
 int main() {
@@ -30,6 +31,7 @@ int main() {
     additionPassed = testPolynomialAddition();
     subtractionPassed = testPolynomialSubtraction();
     multiplicationPassed = testPolynomialMultiplication();
+    divisionPassed = testPolynomialDivision();
     
     powerPassed = testPolynomialPower();
 
@@ -42,7 +44,7 @@ int main() {
     p.addMonomial(1, {0, 1});
     p.print();
 
-    MultivariablePolynomial p_5 = p.pow(35);
+    MultivariablePolynomial p_5 = p.pow(5);
     p_5.print();
 
     std::cout << p_5.eval({2.71, 1.15});

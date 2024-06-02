@@ -22,8 +22,13 @@ void MultivariablePolynomial::addMonomial(double coefficient, const std::vector<
     monomialVec.push_back(Monomial(coefficient, exponents));
 }
 
+//This is to define the poly one Monomial at a time
+void MultivariablePolynomial::addMonomial(const Monomial& mono){
+    monomialVec.push_back(mono);
+}
 
-MultivariablePolynomial MultivariablePolynomial::operator+(const MultivariablePolynomial& other) {
+
+MultivariablePolynomial MultivariablePolynomial::operator+(const MultivariablePolynomial& other) const{
     //Use the Monomial exponents vector as key and the Monomial coefficient as value
     std::map<std::vector<int>, double> expToCoeffMap;
 
@@ -45,11 +50,12 @@ MultivariablePolynomial MultivariablePolynomial::operator+(const MultivariablePo
         }
     }
 
+    result.cleanup();
     return result;
 }
 
 
-MultivariablePolynomial MultivariablePolynomial::operator-(const MultivariablePolynomial& other) {
+MultivariablePolynomial MultivariablePolynomial::operator-(const MultivariablePolynomial& other) const{
     //Use the Monomial exponents vector as key and the Monomial coefficient as value
     std::map<std::vector<int>, double> expToCoeffMap;
 
@@ -71,10 +77,11 @@ MultivariablePolynomial MultivariablePolynomial::operator-(const MultivariablePo
         }
     }
 
+    result.cleanup();
     return result;
 }
 
-MultivariablePolynomial MultivariablePolynomial::operator*(const MultivariablePolynomial& other) {
+MultivariablePolynomial MultivariablePolynomial::operator*(const MultivariablePolynomial& other) const{
     MultivariablePolynomial result;
 
     // Iterate over each monomial in the first polynomial
@@ -103,10 +110,37 @@ MultivariablePolynomial MultivariablePolynomial::operator*(const MultivariablePo
     return result;
 }
 
-MultivariablePolynomial MultivariablePolynomial::operator/(const MultivariablePolynomial& other) {
+//https://www.kristakingmath.com/blog/predator-prey-systems-ghtcp-5e2r4-427ab
+MultivariablePolynomial MultivariablePolynomial::operator/(const MultivariablePolynomial& other) const{
     MultivariablePolynomial result;
-    //TODO
-    //https://www.kristakingmath.com/blog/predator-prey-systems-ghtcp-5e2r4-427ab
+    MultivariablePolynomial remainder = *this;
+    //Get the first monomial used to divide each Monomial in the long division procedure
+    const Monomial* first = &monomialVec[0];
+    const auto& mono1 = other.monomialVec[0];
+
+    //Itearate each monomial of the Polynomial
+    while (!remainder.monomialVec.empty()) {
+        //Perform Monomial division on the first Monomial
+        Monomial div = *first / mono1;
+        //If there is a negative exponent, then you have finished performing division
+        for (int exp : div.exponents) {
+            if (exp < 0) {
+                break;
+            }
+        }
+        result.addMonomial(div);
+        //Multiply each dividend's ("other") Monomial by div
+
+        //I need a new Polynomial
+        MultivariablePolynomial div_to_poly({div});
+        //And then perform multiplication
+        MultivariablePolynomial prod = other * div_to_poly;
+        //Perform difference
+        remainder = remainder - prod;
+        //Pick last, as they are already ordered by cleanup but I need it backwards.
+        first = &remainder.monomialVec.back();
+    }
+
     return result;
 }
 

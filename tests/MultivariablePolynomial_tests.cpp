@@ -91,6 +91,37 @@ bool testPolynomialMultiplication() {
     }
 }
 
+bool testPolynomialDivision() {
+    // Create first polynomial
+    MultivariablePolynomial poly1;
+    poly1.addMonomial(2, {3, 0});  // 2x^2
+    poly1.addMonomial(12, {2, 1});  // 12x^2y
+    poly1.addMonomial(15, {1, 2});  // 15xy^2
+    poly1.addMonomial(-9, {0, 3});  // -9y^3
+
+    // Create second polynomial x + 3y
+    MultivariablePolynomial poly2;
+    poly2.addMonomial(1, {1, 0});  // x
+    poly2.addMonomial(3, {0, 1}); // 3y
+
+    // Multiply the polynomials
+    MultivariablePolynomial result = poly1 / poly2;
+
+    // Expected result 2x^2 + 6xy - 3y^2
+    MultivariablePolynomial expected;
+    expected.addMonomial(2, {2, 0}); // 2x^2
+    expected.addMonomial(6, {1, 1});  // 6xy
+    expected.addMonomial(-3, {0, 2}); // -3y^2
+
+    // Assert to check if the result matches the expected result
+    if (result == expected) {
+        std::cout << "MultivariablePolynomial Division test passed." << std::endl;
+        return true;
+    } else {
+        std::cout << "MultivariablePolynomial Division test failed: not a dividend." << std::endl;
+        return false;
+    }
+}
 
 bool testPolynomialPower() {
     // Create a simple polynomial, p(x) = 1 + x
@@ -136,4 +167,5 @@ bool testPolynomialPower() {
 extern bool testPolynomialAddition();
 extern bool testPolynomialSubtraction();
 extern bool testPolynomialMultiplication();
+extern bool testPolynomialDivision();
 extern bool testPolynomialPower();

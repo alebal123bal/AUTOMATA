@@ -21,7 +21,7 @@ Monomial::Monomial(double coeff, const std::vector<int>& exps) : coefficient(coe
 //would create a Polynomial, will fail.
 //Same goes for division, as a division with a "bigger" Monomial would lead to a fractional Monomial.
 
-Monomial Monomial::operator+(const Monomial& other) {
+Monomial Monomial::operator+(const Monomial& other) const{
     // Check if the exponents are the same
     if (this->exponents == other.exponents) {
         // If exponents match, add the coefficients
@@ -33,7 +33,7 @@ Monomial Monomial::operator+(const Monomial& other) {
     }
 }
 
-Monomial Monomial::operator-(const Monomial& other) {
+Monomial Monomial::operator-(const Monomial& other) const{
     // Check if the exponents are the same
     if (this->exponents == other.exponents) {
         // If exponents match, add the coefficients
@@ -45,7 +45,7 @@ Monomial Monomial::operator-(const Monomial& other) {
     }
 }
 
-Monomial Monomial::operator*(const Monomial& other) {
+Monomial Monomial::operator*(const Monomial& other) const{
     // Multiply the coefficients
     double newCoefficient = this->coefficient * other.coefficient;
 
@@ -59,7 +59,7 @@ Monomial Monomial::operator*(const Monomial& other) {
     return Monomial(newCoefficient, newExponents);
 }
 
-Monomial Monomial::operator/(const Monomial& other) {
+Monomial Monomial::operator/(const Monomial& other) const{
     //Implement division logic
 
     // Divide the coefficients

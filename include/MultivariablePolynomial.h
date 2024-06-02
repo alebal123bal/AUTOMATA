@@ -6,20 +6,23 @@
 #include "MathConstants.h"
 #include <map>
 #include <vector>
+#include <algorithm>
 
 class MultivariablePolynomial {
 private:
-    std::vector<Monomial> monomialVec;
 
 public:
+    std::vector<Monomial> monomialVec;
+
     MultivariablePolynomial();  // Default constructor initialized empty
     MultivariablePolynomial(const std::vector<Monomial>& monomials);  // Parametrized constructor
     
     void addMonomial(double coefficient, const std::vector<int>& exponents);
-    MultivariablePolynomial operator+(const MultivariablePolynomial& other);
-    MultivariablePolynomial operator-(const MultivariablePolynomial& other);
-    MultivariablePolynomial operator*(const MultivariablePolynomial& other);
-    MultivariablePolynomial operator/(const MultivariablePolynomial& other);
+    void addMonomial(const Monomial& mono);
+    MultivariablePolynomial operator+(const MultivariablePolynomial& other) const;
+    MultivariablePolynomial operator-(const MultivariablePolynomial& other) const;
+    MultivariablePolynomial operator*(const MultivariablePolynomial& other) const;
+    MultivariablePolynomial operator/(const MultivariablePolynomial& other) const;
     MultivariablePolynomial pow(int exponent) const;
 
     bool operator==(const MultivariablePolynomial& other);
