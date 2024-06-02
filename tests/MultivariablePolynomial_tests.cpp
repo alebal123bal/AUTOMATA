@@ -91,6 +91,31 @@ bool testPolynomialMultiplication() {
     }
 }
 
+//TODO: check this
+void testPolynomialDivisionBig(){
+    // Create the first (dividend) polynomial: 3x^5y^2 + 5x^4y^3 - 2x^3y^4 + 7x^3y^2 - 4x^2y + x - 6y^5
+    MultivariablePolynomial poly1;
+    poly1.addMonomial(3, {5, 2});   // 3x^5y^2
+    poly1.addMonomial(5, {4, 3});   // 5x^4y^3
+    poly1.addMonomial(-2, {3, 4});  // -2x^3y^4
+    poly1.addMonomial(7, {3, 2});   // 7x^3y^2
+    poly1.addMonomial(-4, {2, 1});  // -4x^2y
+    poly1.addMonomial(1, {1, 0});   // x
+    poly1.addMonomial(-6, {0, 5});  // -6y^5
+
+    // Create the divisor polynomial: x^2 + 2xy - y^2
+    MultivariablePolynomial poly2;
+    poly2.addMonomial(1, {2, 0});   // x^2
+    poly2.addMonomial(2, {1, 1});   // 2xy
+    poly2.addMonomial(-1, {0, 2});  // -y^2
+    
+    // Multiply the polynomials
+    MultivariablePolynomial result = poly1 / poly2;
+
+    result.print();
+}
+
+
 bool testPolynomialDivision() {
     // Create first polynomial
     MultivariablePolynomial poly1;
@@ -168,4 +193,5 @@ extern bool testPolynomialAddition();
 extern bool testPolynomialSubtraction();
 extern bool testPolynomialMultiplication();
 extern bool testPolynomialDivision();
+extern void testPolynomialDivisionBig();
 extern bool testPolynomialPower();

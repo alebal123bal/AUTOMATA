@@ -16,6 +16,7 @@ extern bool testPolynomialAddition();
 extern bool testPolynomialSubtraction();
 extern bool testPolynomialMultiplication();
 extern bool testPolynomialDivision();
+extern void testPolynomialDivisionBig();
 extern bool testPolynomialPower();
 
 int main() {
@@ -36,18 +37,20 @@ int main() {
     powerPassed = testPolynomialPower();
 
     //Lets see how fast is this power
-    MultivariablePolynomial p;
-    p.addMonomial(1, {0, 0});   //1
-    p.addMonomial(1, {1, 0});   //x
-    p.addMonomial(1, {2, 0});   //x^2
-    p.addMonomial(1, {3, 0});   //x^3
-    p.addMonomial(1, {0, 1});
-    p.print();
+    // MultivariablePolynomial p;
+    // p.addMonomial(1, {0, 0});   //1
+    // p.addMonomial(1, {1, 0});   //x
+    // p.addMonomial(1, {2, 0});   //x^2
+    // p.addMonomial(1, {3, 0});   //x^3
+    // p.addMonomial(1, {0, 1});
+    // p.print();
 
-    MultivariablePolynomial p_5 = p.pow(5);
-    p_5.print();
+    // MultivariablePolynomial p_5 = p.pow(5);
+    // p_5.print();
 
-    std::cout << p_5.eval({2.71, 1.15});
+    // std::cout << p_5.eval({2.71, 1.15});
+
+    testPolynomialDivisionBig();
 
     return 0;
 }

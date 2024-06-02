@@ -122,12 +122,19 @@ MultivariablePolynomial MultivariablePolynomial::operator/(const MultivariablePo
     while (!remainder.monomialVec.empty()) {
         //Perform Monomial division on the first Monomial
         Monomial div = *first / mono1;
+        
         //If there is a negative exponent, then you have finished performing division
+        bool negExp = false; 
         for (int exp : div.exponents) {
             if (exp < 0) {
+                negExp = true;
                 break;
             }
         }
+        if(negExp){
+            break;
+        }
+
         result.addMonomial(div);
         //Multiply each dividend's ("other") Monomial by div
 
