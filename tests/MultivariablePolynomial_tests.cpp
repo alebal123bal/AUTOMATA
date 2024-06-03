@@ -91,7 +91,7 @@ bool testPolynomialMultiplication() {
     }
 }
 
-//TODO: check this
+//TODO: add an even bigger division
 bool testPolynomialDivisionBig(){
     // Create the first (dividend) polynomial: 3x^4y^2 + 15x^3y^3 + 4x^3y^2 + 22x^2y^3 + 10xy^4
     MultivariablePolynomial poly1;
