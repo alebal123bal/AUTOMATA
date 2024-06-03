@@ -138,9 +138,10 @@ MultivariablePolynomial MultivariablePolynomial::operator/(const MultivariablePo
             return result;  //TODO: add support for remainder too
         }
 
+        //Push it to the result
         result.addMonomial(div);
-        //Multiply each dividend's ("other") Monomial by div
 
+        //Multiply each dividend's ("other") Monomial by div
         //I need a new Polynomial
         MultivariablePolynomial div_to_poly({div});
         //Perform multiplication
