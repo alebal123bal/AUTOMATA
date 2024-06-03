@@ -135,7 +135,7 @@ MultivariablePolynomial MultivariablePolynomial::operator/(const MultivariablePo
             }
         }
         if(negExp){
-            break;
+            return result;  //TODO: add support for remainder too
         }
 
         result.addMonomial(div);
