@@ -92,27 +92,40 @@ bool testPolynomialMultiplication() {
 }
 
 //TODO: check this
-void testPolynomialDivisionBig(){
-    // Create the first (dividend) polynomial: 3x^5y^2 + 5x^4y^3 - 2x^3y^4 + 7x^3y^2 - 4x^2y + x - 6y^5
+bool testPolynomialDivisionBig(){
+    // Create the first (dividend) polynomial: 3x^4y^2 + 15x^3y^3 + 4x^3y^2 + 22x^2y^3 + 10xy^4
     MultivariablePolynomial poly1;
-    poly1.addMonomial(3, {5, 2});   // 3x^5y^2
-    poly1.addMonomial(5, {4, 3});   // 5x^4y^3
-    poly1.addMonomial(-2, {3, 4});  // -2x^3y^4
-    poly1.addMonomial(7, {3, 2});   // 7x^3y^2
-    poly1.addMonomial(-4, {2, 1});  // -4x^2y
-    poly1.addMonomial(1, {1, 0});   // x
-    poly1.addMonomial(-6, {0, 5});  // -6y^5
+    poly1.addMonomial(15, {3, 3});   // 15x^3y^3    voluntarely inverted this line with the next
+    poly1.addMonomial(3, {4, 2});   // 3x^4y^2
+    poly1.addMonomial(22, {2, 3});   // 22x^2y^3    voluntarely inverted this line with the next
+    poly1.addMonomial(4, {3, 2});  // 4x^3y^2
+    poly1.addMonomial(10, {1, 4});  // 10xy^4
 
-    // Create the divisor polynomial: x^2 + 2xy - y^2
+    // Create the divisor polynomial: x^2y + 5xy^2
     MultivariablePolynomial poly2;
-    poly2.addMonomial(1, {2, 0});   // x^2
-    poly2.addMonomial(2, {1, 1});   // 2xy
-    poly2.addMonomial(-1, {0, 2});  // -y^2
+    poly2.addMonomial(5, {1, 2});   // 5xy^2
+    poly2.addMonomial(1, {2, 1});   // x^2y
     
     // Multiply the polynomials
     MultivariablePolynomial result = poly1 / poly2;
 
+    // Expected result 3x^2y + 4xy + 2y^2
+    MultivariablePolynomial expected;
+    expected.addMonomial(3, {2, 1}); // 3x^2y
+    expected.addMonomial(4, {1, 1});  // 4xy
+    expected.addMonomial(2, {0, 2}); // 2y^2
+
     result.print();
+
+    // Assert to check if the result matches the expected result
+    if (result == expected) {
+        std::cout << "MultivariablePolynomial DivisionBig test passed." << std::endl;
+        return true;
+    } else {
+        std::cout << "MultivariablePolynomial DivisionBig test failed." << std::endl;
+        return false;
+    }
+
 }
 
 
@@ -193,5 +206,5 @@ extern bool testPolynomialAddition();
 extern bool testPolynomialSubtraction();
 extern bool testPolynomialMultiplication();
 extern bool testPolynomialDivision();
-extern void testPolynomialDivisionBig();
+extern bool testPolynomialDivisionBig();
 extern bool testPolynomialPower();

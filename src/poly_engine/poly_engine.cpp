@@ -16,7 +16,7 @@ extern bool testPolynomialAddition();
 extern bool testPolynomialSubtraction();
 extern bool testPolynomialMultiplication();
 extern bool testPolynomialDivision();
-extern void testPolynomialDivisionBig();
+extern bool testPolynomialDivisionBig();
 extern bool testPolynomialPower();
 
 int main() {

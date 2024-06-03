@@ -20,11 +20,13 @@ MultivariablePolynomial::MultivariablePolynomial(const std::vector<Monomial>& mo
 //This is to define the poly one Monomial at a time
 void MultivariablePolynomial::addMonomial(double coefficient, const std::vector<int>& exponents) {
     monomialVec.push_back(Monomial(coefficient, exponents));
+    cleanup();
 }
 
 //This is to define the poly one Monomial at a time
 void MultivariablePolynomial::addMonomial(const Monomial& mono){
     monomialVec.push_back(mono);
+    cleanup();
 }
 
 
@@ -114,9 +116,10 @@ MultivariablePolynomial MultivariablePolynomial::operator*(const MultivariablePo
 MultivariablePolynomial MultivariablePolynomial::operator/(const MultivariablePolynomial& other) const{
     MultivariablePolynomial result;
     MultivariablePolynomial remainder = *this;
+    
     //Get the first monomial used to divide each Monomial in the long division procedure
-    const Monomial* first = &monomialVec[0];
-    const auto& mono1 = other.monomialVec[0];
+    const Monomial* first = &monomialVec.back();
+    const auto& mono1 = other.monomialVec.back();
 
     //Itearate each monomial of the Polynomial
     while (!remainder.monomialVec.empty()) {
