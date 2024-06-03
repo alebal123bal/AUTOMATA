@@ -119,12 +119,12 @@ MultivariablePolynomial MultivariablePolynomial::operator/(const MultivariablePo
     
     //Get the first monomial used to divide each Monomial in the long division procedure
     const Monomial* first = &monomialVec.back();
-    const auto& mono1 = other.monomialVec.back();
+    const Monomial* mono1 = &other.monomialVec.back();
 
     //Itearate each monomial of the Polynomial
     while (!remainder.monomialVec.empty()) {
         //Perform Monomial division on the first Monomial
-        Monomial div = *first / mono1;
+        Monomial div = *first / *mono1;
         
         //If there is a negative exponent, then you have finished performing division
         bool negExp = false; 
@@ -143,7 +143,7 @@ MultivariablePolynomial MultivariablePolynomial::operator/(const MultivariablePo
 
         //I need a new Polynomial
         MultivariablePolynomial div_to_poly({div});
-        //And then perform multiplication
+        //Perform multiplication
         MultivariablePolynomial prod = other * div_to_poly;
         //Perform difference
         remainder = remainder - prod;
