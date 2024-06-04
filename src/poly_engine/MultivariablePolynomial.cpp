@@ -113,7 +113,7 @@ MultivariablePolynomial MultivariablePolynomial::operator*(const MultivariablePo
 }
 
 //https://www.kristakingmath.com/blog/predator-prey-systems-ghtcp-5e2r4-427ab
-MultivariablePolynomial MultivariablePolynomial::operator/(const MultivariablePolynomial& other) const{
+std::pair<MultivariablePolynomial, MultivariablePolynomial> MultivariablePolynomial::operator/(const MultivariablePolynomial& other) const{
     MultivariablePolynomial result;
     MultivariablePolynomial remainder = *this;
     
@@ -135,7 +135,7 @@ MultivariablePolynomial MultivariablePolynomial::operator/(const MultivariablePo
             }
         }
         if(negExp){
-            return result;  //TODO: add support for remainder too
+            return std::pair(result, remainder);  //TODO: add support for remainder too
         }
 
         //Push it to the result
@@ -152,7 +152,7 @@ MultivariablePolynomial MultivariablePolynomial::operator/(const MultivariablePo
         first = &remainder.monomialVec.back();
     }
 
-    return result;
+    return std::pair(result, remainder);
 }
 
 MultivariablePolynomial MultivariablePolynomial::pow(int exponent) const {

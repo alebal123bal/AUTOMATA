@@ -22,7 +22,7 @@ public:
     MultivariablePolynomial operator+(const MultivariablePolynomial& other) const;
     MultivariablePolynomial operator-(const MultivariablePolynomial& other) const;
     MultivariablePolynomial operator*(const MultivariablePolynomial& other) const;
-    MultivariablePolynomial operator/(const MultivariablePolynomial& other) const;
+    std::pair<MultivariablePolynomial, MultivariablePolynomial> operator/(const MultivariablePolynomial& other) const;
     MultivariablePolynomial pow(int exponent) const;
 
     bool operator==(const MultivariablePolynomial& other);

@@ -1,6 +1,8 @@
 #include "MultivariablePolynomial.h"
 #include <iostream>
-#include <cassert>  // for assert()
+#include <cassert>
+#include <cmath>
+#include <chrono>
 
 // Test functions
 
@@ -91,7 +93,6 @@ bool testPolynomialMultiplication() {
     }
 }
 
-//TODO: add an even bigger division
 bool testPolynomialDivisionBig(){
     // Create the first (dividend) polynomial: 3x^4y^2 + 15x^3y^3 + 4x^3y^2 + 22x^2y^3 + 10xy^4
     MultivariablePolynomial poly1;
@@ -106,8 +107,8 @@ bool testPolynomialDivisionBig(){
     poly2.addMonomial(5, {1, 2});   // 5xy^2
     poly2.addMonomial(1, {2, 1});   // x^2y
     
-    // Multiply the polynomials
-    MultivariablePolynomial result = poly1 / poly2;
+    // Divide the polynomials
+    std::pair<MultivariablePolynomial, MultivariablePolynomial> results = poly1 / poly2;
 
     // Expected result 3x^2y + 4xy + 2y^2
     MultivariablePolynomial expected;
@@ -115,10 +116,8 @@ bool testPolynomialDivisionBig(){
     expected.addMonomial(4, {1, 1});  // 4xy
     expected.addMonomial(2, {0, 2}); // 2y^2
 
-    result.print();
-
     // Assert to check if the result matches the expected result
-    if (result == expected) {
+    if (results.first == expected) {
         std::cout << "MultivariablePolynomial DivisionBig test passed." << std::endl;
         return true;
     } else {
@@ -142,8 +141,8 @@ bool testPolynomialDivision() {
     poly2.addMonomial(1, {1, 0});  // x
     poly2.addMonomial(3, {0, 1}); // 3y
 
-    // Multiply the polynomials
-    MultivariablePolynomial result = poly1 / poly2;
+    // Divide the polynomials
+    std::pair<MultivariablePolynomial, MultivariablePolynomial> results = poly1 / poly2;
 
     // Expected result 2x^2 + 6xy - 3y^2
     MultivariablePolynomial expected;
@@ -152,11 +151,84 @@ bool testPolynomialDivision() {
     expected.addMonomial(-3, {0, 2}); // -3y^2
 
     // Assert to check if the result matches the expected result
-    if (result == expected) {
+    if (results.first == expected) {
         std::cout << "MultivariablePolynomial Division test passed." << std::endl;
         return true;
     } else {
         std::cout << "MultivariablePolynomial Division test failed: not a dividend." << std::endl;
+        return false;
+    }
+}
+
+//Now the big poly gets "created" through a big multiplication (power eventually) and then divided
+bool testPolynomialMultiplyDivide(){    
+    // Start timing
+    auto start_time = std::chrono::high_resolution_clock::now();
+
+    int exponent = 50;
+
+    // Create first polynomial x + 3y
+    MultivariablePolynomial poly1;
+    poly1.addMonomial(1, {1, 0});  // x
+    poly1.addMonomial(3, {0, 1}); // 3y
+
+    //Power it to the 35th
+    MultivariablePolynomial poly2 = poly1.pow(exponent);
+
+    //Try division: let's check how fast it is
+    std::pair<MultivariablePolynomial, MultivariablePolynomial> poly3 = poly1 / poly2;
+
+    //Eventually evaluate it numerically but with super small values
+    double res_true = poly2.eval({0.005, 0.007}) / poly1.eval({0.5, 0.7});
+    double my_res = poly3.first.eval({0.005, 0.007});
+
+    // Assert to check if the result matches the expected result
+    if (std::fabs(my_res - res_true) <= MathConstants::EPSILON) {
+        // Measure elapsed time
+        auto end_time = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count();
+
+        std::cout << "testPolynomialMultiplyDivide passed. Time elapsed: " << duration << " ms. Exponent " << exponent << std::endl;
+        return true;
+    } else {
+        std::cout << "testPolynomialMultiplyDivide failed. . Exponent " << exponent << std::endl;
+        return false;
+    }
+}
+
+//Create a mock polynomial through a multiplication, and then divide it with a smaller one.
+//Multiply back the quotient with the divisor and add the remainder. Numerical eval will tell correctness.
+bool testRemainderDivision(){
+    MultivariablePolynomial poly1;
+    poly1.addMonomial(2, {3, 0});  // 2x^2
+    poly1.addMonomial(12, {2, 1});  // 12x^2y
+    poly1.addMonomial(11, {3, 2});  // 11x^3y^2
+    
+    MultivariablePolynomial poly2;
+    poly2.addMonomial(1, {1, 0});  // x
+    poly2.addMonomial(3, {0, 1}); // 3y
+
+    MultivariablePolynomial poly3 = poly1 * poly2;
+
+    //Try this dividend
+    MultivariablePolynomial poly4;
+    poly4.addMonomial(1, {2, 0});  // x^2
+    poly4.addMonomial(1, {0, 1}); // y
+
+    std::pair<MultivariablePolynomial, MultivariablePolynomial> results = poly3 / poly4;
+
+    std::vector<double> values = {0.005, 0.007};
+
+    //Invert procedure
+    double correct_res = poly3.eval(values);
+    double my_res = results.first.eval(values) * poly4.eval(values) + results.second.eval(values);
+
+    // Assert to check if the result matches the expected result
+    if (std::fabs(my_res - correct_res) <= MathConstants::EPSILON) {
+        std::cout << "testRemainderDivision passed." << std::endl;
+        return true;
+    } else {
+        std::cout << "testRemainderDivision failed." << std::endl;
         return false;
     }
 }
@@ -207,4 +279,6 @@ extern bool testPolynomialSubtraction();
 extern bool testPolynomialMultiplication();
 extern bool testPolynomialDivision();
 extern bool testPolynomialDivisionBig();
+extern bool testPolynomialMultiplyDivide();
+extern bool testRemainderDivision();
 extern bool testPolynomialPower();
