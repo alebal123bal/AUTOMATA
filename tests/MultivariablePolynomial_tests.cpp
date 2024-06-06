@@ -128,6 +128,35 @@ bool testPolynomialDivisionBig(){
 }
 
 
+bool testPolynomialDivisionSmall() {
+    // Create first polynomial
+    MultivariablePolynomial poly1;
+    poly1.addMonomial(1, {2, 0});  // x^2
+    poly1.addMonomial(-1, {0, 0});  // -1
+
+    // Create second polynomial x + 1
+    MultivariablePolynomial poly2;
+    poly2.addMonomial(1, {1, 0});  // x
+    poly2.addMonomial(1, {0, 0}); // 1
+
+    // Divide the polynomials
+    std::pair<MultivariablePolynomial, MultivariablePolynomial> results = poly1 / poly2;
+
+    // Expected result x - 1
+    MultivariablePolynomial expected;
+    expected.addMonomial(1, {1, 0}); // x
+    expected.addMonomial(-1, {0, 0});  // -1
+
+    // Assert to check if the result matches the expected result
+    if (results.first == expected) {
+        std::cout << "MultivariablePolynomial Division Small test passed." << std::endl;
+        return true;
+    } else {
+        std::cout << "MultivariablePolynomial Division Small test failed: not a dividend." << std::endl;
+        return false;
+    }
+}
+
 bool testPolynomialDivision() {
     // Create first polynomial
     MultivariablePolynomial poly1;
@@ -279,6 +308,7 @@ extern bool testPolynomialSubtraction();
 extern bool testPolynomialMultiplication();
 extern bool testPolynomialDivision();
 extern bool testPolynomialDivisionBig();
+extern bool testPolynomialDivisionSmall();
 extern bool testPolynomialMultiplyDivide();
 extern bool testRemainderDivision();
 extern bool testPolynomialPower();

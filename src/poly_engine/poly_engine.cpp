@@ -17,6 +17,7 @@ extern bool testPolynomialSubtraction();
 extern bool testPolynomialMultiplication();
 extern bool testPolynomialDivision();
 extern bool testPolynomialDivisionBig();
+extern bool testPolynomialDivisionSmall();
 extern bool testPolynomialMultiplyDivide();
 extern bool testRemainderDivision();
 extern bool testPolynomialPower();
@@ -41,6 +42,7 @@ int main() {
     bool Polynomial_tests_passed = additionPassed && subtractionPassed && multiplicationPassed && divisionPassed && powerPassed;
 
     testPolynomialDivisionBig();
+    testPolynomialDivisionSmall();
     testPolynomialMultiplyDivide();
     testRemainderDivision();
 
