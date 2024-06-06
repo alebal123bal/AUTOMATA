@@ -26,10 +26,10 @@ bool testPolynomialAddition() {
 
     // Test if the result matches the expected result
     if (result == expected) {
-        std::cout << "MultivariablePolynomial Addition test passed." << std::endl;
+        std::cout << "testPolynomialAddition passed." << std::endl;
         return true;
     } else {
-        std::cout << "MultivariablePolynomial Addition test failed." << std::endl;
+        std::cout << "testPolynomialAddition failed." << std::endl;
         return false;
     }
 }
@@ -55,10 +55,10 @@ bool testPolynomialSubtraction() {
 
     // Test if the result matches the expected result
     if (result == expected) {
-        std::cout << "MultivariablePolynomial Subtraction test passed." << std::endl;
+        std::cout << "testPolynomialSubtraction passed." << std::endl;
         return true;
     } else {
-        std::cout << "MultivariablePolynomial Subtraction test failed." << std::endl;
+        std::cout << "testPolynomialSubtraction failed." << std::endl;
         return false;
     }
 }
@@ -85,10 +85,10 @@ bool testPolynomialMultiplication() {
 
     // Assert to check if the result matches the expected result
     if (result == expected) {
-        std::cout << "MultivariablePolynomial Multiplication test passed." << std::endl;
+        std::cout << "testPolynomialMultiplication passed." << std::endl;
         return true;
     } else {
-        std::cout << "MultivariablePolynomial Multiplication test failed." << std::endl;
+        std::cout << "testPolynomialMultiplication failed." << std::endl;
         return false;
     }
 }
@@ -118,10 +118,10 @@ bool testPolynomialDivisionBig(){
 
     // Assert to check if the result matches the expected result
     if (results.first == expected) {
-        std::cout << "MultivariablePolynomial DivisionBig test passed." << std::endl;
+        std::cout << "testPolynomialDivisionBig test passed." << std::endl;
         return true;
     } else {
-        std::cout << "MultivariablePolynomial DivisionBig test failed." << std::endl;
+        std::cout << "testPolynomialDivisionBig failed." << std::endl;
         return false;
     }
 
@@ -149,10 +149,10 @@ bool testPolynomialDivisionSmall() {
 
     // Assert to check if the result matches the expected result
     if (results.first == expected) {
-        std::cout << "MultivariablePolynomial Division Small test passed." << std::endl;
+        std::cout << "testPolynomialDivisionSmall passed." << std::endl;
         return true;
     } else {
-        std::cout << "MultivariablePolynomial Division Small test failed: not a dividend." << std::endl;
+        std::cout << "testPolynomialDivisionSmall failed: not a dividend." << std::endl;
         return false;
     }
 }
@@ -175,10 +175,10 @@ bool testPolynomialDivisionNoSymbols() {
 
     // Assert to check if the result matches the expected result
     if (results.first == expected) {
-        std::cout << "MultivariablePolynomial Division NoSymbols test passed." << std::endl;
+        std::cout << "testPolynomialDivisionNoSymbols passed." << std::endl;
         return true;
     } else {
-        std::cout << "MultivariablePolynomial Division NoSymbolss test failed: not a dividend." << std::endl;
+        std::cout << "testPolynomialDivisionNoSymbols failed: not a dividend." << std::endl;
         return false;
     }
 }
@@ -207,10 +207,10 @@ bool testPolynomialDivision() {
 
     // Assert to check if the result matches the expected result
     if (results.first == expected) {
-        std::cout << "MultivariablePolynomial Division test passed." << std::endl;
+        std::cout << "testPolynomialDivision passed." << std::endl;
         return true;
     } else {
-        std::cout << "MultivariablePolynomial Division test failed: not a dividend." << std::endl;
+        std::cout << "testPolynomialDivision failed: not a dividend." << std::endl;
         return false;
     }
 }
@@ -304,7 +304,7 @@ bool testPolynomialPower() {
 
     // Check if the results match the expected results
     if (!(p_cubed == expected_p_cubed)) {
-        std::cout << "Test failed: p(x)^3 did not match the expected polynomial." << std::endl;
+        std::cout << "testPolynomialPower failed." << std::endl;
         return false;
     }
 
@@ -314,18 +314,18 @@ bool testPolynomialPower() {
     expected_p_zero.addMonomial(1, {0, 0});  // 1
 
     if (!(p_zero == expected_p_zero)) {
-        std::cout << "Test failed: p(x)^0 did not match the expected polynomial of 1." << std::endl;
+        std::cout << "testPolynomialPower failed: p(x)^0 did not match the expected polynomial of 1." << std::endl;
         return false;
     }
 
     // Compute p(x)^1 = p(x) (any polynomial to the first power should be the polynomial itself)
     MultivariablePolynomial p_one = p.pow(1);
     if (!(p_one == p)) {
-        std::cout << "Test failed: p(x)^1 did not match the original polynomial p(x)." << std::endl;
+        std::cout << "testPolynomialPower failed: p(x)^1 did not match the original polynomial p(x)." << std::endl;
         return false;
     }
 
-    std::cout << "All Polynomial Power tests passed." << std::endl;
+    std::cout << "testPolynomialPower passed." << std::endl;
     return true;
 }
 
