@@ -186,7 +186,7 @@ bool testPolynomialDivisionNoSymbols() {
 bool testPolynomialDivision() {
     // Create first polynomial
     MultivariablePolynomial poly1;
-    poly1.addMonomial(2, {3, 0});  // 2x^2
+    poly1.addMonomial(2, {3, 0});  // 2x^3
     poly1.addMonomial(12, {2, 1});  // 12x^2y
     poly1.addMonomial(15, {1, 2});  // 15xy^2
     poly1.addMonomial(-9, {0, 3});  // -9y^3
@@ -255,7 +255,7 @@ bool testPolynomialMultiplyDivide(){
 //Multiply back the quotient with the divisor and add the remainder. Numerical eval will tell correctness.
 bool testRemainderDivision(){
     MultivariablePolynomial poly1;
-    poly1.addMonomial(2, {3, 0});  // 2x^2
+    poly1.addMonomial(2, {3, 0});  // 2x^3
     poly1.addMonomial(12, {2, 1});  // 12x^2y
     poly1.addMonomial(11, {3, 2});  // 11x^3y^2
     
@@ -329,6 +329,21 @@ bool testPolynomialPower() {
     return true;
 }
 
+void testBruteFactorization(){
+    // Create first polynomial
+    MultivariablePolynomial poly1;
+    // poly1.addMonomial(2, {3, 0});  // 2x^3
+    // poly1.addMonomial(12, {2, 1});  // 12x^2y
+    // poly1.addMonomial(15, {1, 2});  // 15xy^2
+    // poly1.addMonomial(-9, {0, 3});  // -9y^3
+
+    poly1.addMonomial(1, {2, 0});  // x^2
+    poly1.addMonomial(-1, {0, 0});  // -1
+    
+    //Try factorizing it
+    poly1.factorize_engine();
+}
+
 extern bool testPolynomialAddition();
 extern bool testPolynomialSubtraction();
 extern bool testPolynomialMultiplication();
@@ -339,3 +354,4 @@ extern bool testPolynomialDivisionNoSymbols();
 extern bool testPolynomialMultiplyDivide();
 extern bool testRemainderDivision();
 extern bool testPolynomialPower();
+extern void testBruteFactorization();

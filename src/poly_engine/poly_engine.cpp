@@ -22,6 +22,7 @@ extern bool testPolynomialDivisionNoSymbols();
 extern bool testPolynomialMultiplyDivide();
 extern bool testRemainderDivision();
 extern bool testPolynomialPower();
+extern void testBruteFactorization();
 
 int main() {
     bool additionPassed = testAddition();
@@ -50,6 +51,8 @@ int main() {
 
     // Return non-zero if any tests fail
     bool advanced_Polynomial_tests_passed = advanced_0 && advanced_1 && advanced_2 && advanced_3 && advanced_4;
+
+    testBruteFactorization();
 
     return 0;
 }

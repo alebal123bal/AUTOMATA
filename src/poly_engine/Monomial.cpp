@@ -97,6 +97,10 @@ bool Monomial::hasEqualExponents(const Monomial& other) const {
     return this->exponents == other.exponents;
 }
 
+// A utility function to check if a monomial is a pure coefficient (no variables)
+bool Monomial::isPureCoefficient() const {
+    return std::all_of(exponents.begin(), exponents.end(), [](int exp){ return exp == 0; });
+}
 
 double Monomial::eval(const std::vector<double>& values) const {
     double result = coefficient; // Start with the coefficient

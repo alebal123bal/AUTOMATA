@@ -9,8 +9,6 @@
 #include <algorithm>
 
 class MultivariablePolynomial {
-private:
-
 public:
     std::vector<Monomial> monomialVec;
 
@@ -35,10 +33,12 @@ public:
 
     MultivariablePolynomial pow(int exponent) const;
     std::vector<MultivariablePolynomial> factorize() const; //Implement Groebner's
+    std::vector<MultivariablePolynomial> factorize_engine() const; //Brute force
 
     //Equality check
 
     bool operator==(const MultivariablePolynomial& other);
+    bool isPureCoefficientPoly() const ;
 
     //Housekeeping functions
 
@@ -53,6 +53,10 @@ public:
 
     void print() const;
 
+private:
+    std::vector<Monomial> generateFullMonomialSet() const;
+    int findMaxCoefficient() const;
+    MultivariablePolynomial generateFactor(int step) const;
 };
 
 #endif // MULTIVARIABLE_POLYNOMIAL_H

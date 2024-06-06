@@ -21,6 +21,7 @@ class Monomial {
 
         bool operator==(const Monomial& other);
         bool hasEqualExponents(const Monomial& other) const;
+        bool isPureCoefficient() const;
         
         double eval(const std::vector<double>& values) const;
 
