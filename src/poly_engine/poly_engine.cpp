@@ -18,6 +18,7 @@ extern bool testPolynomialMultiplication();
 extern bool testPolynomialDivision();
 extern bool testPolynomialDivisionBig();
 extern bool testPolynomialDivisionSmall();
+extern bool testPolynomialDivisionNoSymbols();
 extern bool testPolynomialMultiplyDivide();
 extern bool testRemainderDivision();
 extern bool testPolynomialPower();
@@ -41,10 +42,14 @@ int main() {
     // Return non-zero if any tests fail
     bool Polynomial_tests_passed = additionPassed && subtractionPassed && multiplicationPassed && divisionPassed && powerPassed;
 
-    testPolynomialDivisionBig();
-    testPolynomialDivisionSmall();
-    testPolynomialMultiplyDivide();
-    testRemainderDivision();
+    bool advanced_0 = testPolynomialDivisionBig();
+    bool advanced_1 = testPolynomialDivisionSmall();
+    bool advanced_2 = testPolynomialDivisionNoSymbols();
+    bool advanced_3 = testPolynomialMultiplyDivide();
+    bool advanced_4 = testRemainderDivision();
+
+    // Return non-zero if any tests fail
+    bool advanced_Polynomial_tests_passed = advanced_0 && advanced_1 && advanced_2 && advanced_3 && advanced_4;
 
     return 0;
 }
