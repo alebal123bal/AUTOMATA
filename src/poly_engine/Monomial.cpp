@@ -59,6 +59,14 @@ Monomial Monomial::operator*(const Monomial& other) const{
     return Monomial(newCoefficient, newExponents);
 }
 
+Monomial Monomial::operator*(double scalar) const {
+    return Monomial(coefficient * scalar, exponents);
+}
+
+Monomial operator*(double scalar, const Monomial& monomial) {
+    return monomial * scalar;  // Utilize the member function for multiplication
+}
+
 Monomial Monomial::operator/(const Monomial& other) const{
     //Implement division logic
 

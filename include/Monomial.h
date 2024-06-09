@@ -19,6 +19,9 @@ class Monomial {
         Monomial operator/(const Monomial& other) const;
         Monomial pow(int exponent) const;
 
+        Monomial operator*(double scalar) const;
+        friend Monomial operator*(double scalar, const Monomial& monomial);
+
         bool operator==(const Monomial& other);
         bool hasEqualExponents(const Monomial& other) const;
         bool isPureCoefficient() const;
