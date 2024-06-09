@@ -9,6 +9,7 @@
 extern bool testAddition();
 extern bool testSubtraction();
 extern bool testMultiplication();
+extern bool testScalarMultiplication();
 extern bool testDivision();
 extern bool testPow();
 
@@ -28,11 +29,12 @@ int main() {
     bool additionPassed = testAddition();
     bool subtractionPassed = testSubtraction();
     bool multiplicationPassed = testMultiplication();
+    bool scalarMultiplicationPassed = testScalarMultiplication();
     bool divisionPassed = testDivision();
     bool powerPassed = testPow();
 
     // Return non-zero if any tests fail
-    bool Monomial_tests_passed = additionPassed && subtractionPassed && multiplicationPassed && divisionPassed && powerPassed;
+    bool Monomial_tests_passed = additionPassed && subtractionPassed && multiplicationPassed && scalarMultiplicationPassed && divisionPassed && powerPassed;
     
     additionPassed = testPolynomialAddition();
     subtractionPassed = testPolynomialSubtraction();

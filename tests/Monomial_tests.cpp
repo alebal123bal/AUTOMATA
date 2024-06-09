@@ -47,6 +47,22 @@ bool testMultiplication() {
     }
 }
 
+bool testScalarMultiplication() {
+    double coeff = 5.0;
+    Monomial mono1(4.0, {2, 3});
+    Monomial expectedProduct(20.0, {2, 3});
+    Monomial resultProduct = coeff * mono1;
+    Monomial resultProduct_back = mono1 * coeff;
+
+    if (resultProduct == expectedProduct && resultProduct_back == expectedProduct) {
+        std::cout << "Monomial Scalar Multiplication test passed." << std::endl;
+        return true;
+    } else {
+        std::cout << "Monomial Scalar Multiplication test failed." << std::endl;
+        return false;
+    }
+}
+
 bool testDivision() {
     Monomial mono1(10.0, {5, 6});
     Monomial mono2(2.0, {3, 2});
@@ -81,5 +97,6 @@ bool testPow() {
 extern bool testAddition();
 extern bool testSubtraction();
 extern bool testMultiplication();
+extern bool testScalarMultiplication();
 extern bool testDivision();
 extern bool testPow();
