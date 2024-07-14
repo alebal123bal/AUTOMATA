@@ -19,13 +19,6 @@ set(SOURCES
     ${CMAKE_SOURCE_DIR}/tests/Monomial_tests.cpp
     ${CMAKE_SOURCE_DIR}/tests/MultivariablePolynomial_tests.cpp
 
-    ${CMAKE_SOURCE_DIR}/src/automata.cpp
-    ${CMAKE_SOURCE_DIR}/src/basic_types/operation.cpp 
-    ${CMAKE_SOURCE_DIR}/src/basic_types/parenthesis.cpp
-    ${CMAKE_SOURCE_DIR}/src/basic_types/token.cpp
-
-    ${CMAKE_SOURCE_DIR}/src/parsing/expr_parser.cpp
-
 )
 
 # Add executable
