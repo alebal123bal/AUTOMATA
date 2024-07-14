@@ -29,10 +29,11 @@ public:
     MultivariablePolynomial operator*(const MultivariablePolynomial& other) const;
     std::pair<MultivariablePolynomial, MultivariablePolynomial> operator/(const MultivariablePolynomial& other) const;
 
+    //TODO: add scalar * and / operators too
+
     //Custom functions
 
     MultivariablePolynomial pow(int exponent) const;
-    std::vector<MultivariablePolynomial> factorize() const; //Implement Groebner's
     std::vector<MultivariablePolynomial> factorize_engine() const; //Brute force
 
     //Equality check
@@ -56,7 +57,9 @@ public:
 private:
     std::vector<Monomial> generateFullMonomialSet() const;
     int findMaxCoefficient() const;
-    MultivariablePolynomial generateFactor(int step) const;
+    MultivariablePolynomial generateFactor(int max_iter, int step) const;
+    template<typename T>
+    std::vector<std::vector<T>> generateNElementSubsets(const std::vector<T>& elements, size_t n);
 };
 
 #endif // MULTIVARIABLE_POLYNOMIAL_H

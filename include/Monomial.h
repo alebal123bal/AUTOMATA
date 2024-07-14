@@ -19,6 +19,8 @@ class Monomial {
         Monomial operator/(const Monomial& other) const;
         Monomial pow(int exponent) const;
 
+
+        //TODO: add scalar / operator too
         Monomial operator*(double scalar) const;
         friend Monomial operator*(double scalar, const Monomial& monomial);
 

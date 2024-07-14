@@ -54,7 +54,5 @@ int main() {
     // Return non-zero if any tests fail
     bool advanced_Polynomial_tests_passed = advanced_0 && advanced_1 && advanced_2 && advanced_3 && advanced_4;
 
-    testBruteFactorization();
-
     return 0;
 }

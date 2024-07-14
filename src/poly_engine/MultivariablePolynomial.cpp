@@ -189,16 +189,6 @@ MultivariablePolynomial MultivariablePolynomial::pow(int exponent) const {
     return result;
 }
 
-std::vector<MultivariablePolynomial> MultivariablePolynomial::factorize_engine() const{
-    std::vector<MultivariablePolynomial> factors;
-
-    MultivariablePolynomial factor = generateFactor(1);
-
-    factor.print();
-
-    return factors;
-};
-
 
 bool MultivariablePolynomial::operator==(const MultivariablePolynomial& other){
     // Check if they have the same number of monomials
@@ -305,46 +295,7 @@ void MultivariablePolynomial::print() const {
 }
 
 
-// Function to generate all possible monomials up to the maximum exponents
-std::vector<Monomial> MultivariablePolynomial::generateFullMonomialSet() const{
-    if (monomialVec.empty()) return {};
-
-    // Step 1: Determine the number of variables and max exponents for each
-    size_t numVariables = SYM_NUMBER;
-    std::vector<int> maxExponents(numVariables, 0);
-
-    for (const auto& mono : monomialVec) {
-        for (size_t i = 0; i < numVariables; ++i) {
-            maxExponents[i] = std::max(maxExponents[i], mono.exponents[i]);
-        }
-    }
-
-    // Step 2: Generate all possible monomials given the max exponents
-    std::vector<Monomial> allMonomials;
-    std::vector<int> currentExponents(numVariables, 0);
-
-    // Recursive function to generate monomials
-    std::function<void(int)> generateMonomials = [&](int varIndex) {
-        if (varIndex == numVariables) {
-            // Base case: all variables have been assigned an exponent
-            allMonomials.push_back(Monomial{1.0, currentExponents});  // Assume coefficient 1
-            return;
-        }
-
-        // Recursive case: iterate over all possible exponents for the current variable
-        for (int exp = 0; exp <= maxExponents[varIndex]; ++exp) {
-            currentExponents[varIndex] = exp;
-            generateMonomials(varIndex + 1);
-        }
-        currentExponents[varIndex] = 0;  // Reset before going back up the stack
-    };
-
-    generateMonomials(0);  // Start the recursion with the first variable
-
-    return allMonomials;
-}
-
-//Find max coefficient of each symbol inside the poly
+//Find max coefficient out of all symbols inside the poly
 int MultivariablePolynomial::findMaxCoefficient() const {
     int maxCoeff = 0;
     for (const auto& mono : monomialVec) {
@@ -358,63 +309,3 @@ bool MultivariablePolynomial::isPureCoefficientPoly() const {
     return monomialVec.size() == 1 && monomialVec[0].isPureCoefficient();
 }
 
-//Look for factors
-MultivariablePolynomial MultivariablePolynomial::generateFactor(int step) const {
-    std::vector<Monomial> allMonomials = generateFullMonomialSet();
-    int maxCoeff = findMaxCoefficient();
-
-    MultivariablePolynomial foundFactor; // Found factor, if any
-
-    std::function<bool(MultivariablePolynomial&, size_t)> tryCombos = [&](MultivariablePolynomial& currentPoly, size_t startIndex) -> bool {
-        for (size_t i = startIndex; i < allMonomials.size(); ++i) {
-            for (int coeff = -maxCoeff; coeff <= maxCoeff; coeff += step) {
-                Monomial newMono = allMonomials[i];
-                newMono.coefficient = coeff;
-                currentPoly.monomialVec.push_back(newMono);
-                currentPoly.cleanup();
-
-                // Perform division and check remainder
-                if (currentPoly.isPureCoefficientPoly()){
-                    continue;
-                }
-
-                auto [quotient, remainder] = *this / currentPoly;
-                if (remainder.monomialVec.empty()) {
-                    foundFactor = currentPoly;
-                    return true; // Exit recursion and loops immediately
-                }
-
-                MultivariablePolynomial correct_compare;
-                correct_compare.addMonomial(1, {1, 0});
-                correct_compare.addMonomial(3, {0, 1});
-
-                if(currentPoly == correct_compare){
-                    currentPoly.print();
-                    std::cout << std::endl;
-                }
-
-                // Recurse with the new monomial added
-                if (tryCombos(currentPoly, i + 1)) return true;
-
-                // Backtrack
-                currentPoly.monomialVec.pop_back();
-            }
-        }
-        return false;
-    };
-
-    // Initialize with pure coefficients first
-    for (int coeff = -maxCoeff; coeff <= maxCoeff; coeff += step) {
-        if (coeff == 0) continue; // Skip zero as it is trivial and not useful as a factor
-
-        MultivariablePolynomial initial;
-        initial.monomialVec.push_back(Monomial{coeff, std::vector<int>(allMonomials.front().exponents.size(), 0)});  // Adding a pure coefficient
-
-        // Don't check if this pure coefficient divides the polynomial
-
-        // Try adding more complex terms to the initial pure coefficient
-        if (tryCombos(initial, 0)) break; // Stop if a factor is found
-    }
-
-    return foundFactor; // This will be an empty polynomial unless a factor was found
-}
