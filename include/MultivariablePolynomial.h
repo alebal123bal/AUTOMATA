@@ -34,7 +34,6 @@ public:
     //Custom functions
 
     MultivariablePolynomial pow(int exponent) const;
-    std::vector<MultivariablePolynomial> factorize_engine() const; //Brute force
 
     //Equality check
 
