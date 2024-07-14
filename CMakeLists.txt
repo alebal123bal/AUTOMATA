@@ -38,6 +38,8 @@ pybind11_add_module(automata_bindings ${CMAKE_SOURCE_DIR}/bindings/bindings.cpp 
 target_link_libraries(automata PRIVATE Python::Python)
 target_link_libraries(automata_bindings PRIVATE Python::Python)
 
+set_target_properties(automata_bindings PROPERTIES OUTPUT_NAME "automata_bindings")
+
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # Print some debug information
