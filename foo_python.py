@@ -33,13 +33,14 @@ B = automata_bindings.MultivariablePolynomial(monomials_B)
 # Perform polynomial multiplication
 product = A * B
 
-print(f"Product: {product.print()}")
+print("Product")
+product.print()
 
 # Perform polynomial division on the new polynomial
 quotient, remainder = product / A
 
 # Print the quotient and remainder
-print("Quotient:")
+print("\nQuotient:")
 quotient.print()
 
 print("\nRemainder:")
