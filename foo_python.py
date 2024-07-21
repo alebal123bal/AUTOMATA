@@ -1,6 +1,5 @@
 import sys
 import os
-import botorch
 
 # Add the build/bin directory to the system path
 sys.path.append('/mnt/c/Users/Alessandro/OneDrive/Desktop/programs/AUTOMATA/build/bin')
@@ -13,29 +12,31 @@ print("Module imported successfully")
 
 
 # Define two polynomials
-# For example, let's say we have two polynomials P(x, y) and Q(x, y)
-# P(x, y) = 3x^2y + 2xy^2 + y^3
-# Q(x, y) = x + y
 
 # Create monomials for P(x, y)
-monomials_P = [
-    automata_bindings.Monomial(3, [2, 1]),  # 3x^2y
-    automata_bindings.Monomial(2, [1, 2]),  # 2xy^2
-    automata_bindings.Monomial(1, [0, 3])   # y^3
+monomials_A = [
+    automata_bindings.Monomial(1, [2, 0]),  # x^2
+    automata_bindings.Monomial(2, [1, 1]),  # 2xy
+    automata_bindings.Monomial(1, [0, 2])   # y^2
 ]
 
 # Create monomials for Q(x, y)
-monomials_Q = [
-    automata_bindings.Monomial(1, [1, 0]),  # x
-    automata_bindings.Monomial(1, [0, 1])   # y
+monomials_B = [
+    automata_bindings.Monomial(1, [3, 0]),  # x^3
+    automata_bindings.Monomial(1, [0, 3])   # y^3
 ]
 
 # Create polynomials from monomials
-P = automata_bindings.MultivariablePolynomial(monomials_P)
-Q = automata_bindings.MultivariablePolynomial(monomials_Q)
+A = automata_bindings.MultivariablePolynomial(monomials_A)
+B = automata_bindings.MultivariablePolynomial(monomials_B)
 
-# Perform polynomial division
-quotient, remainder = P / Q
+# Perform polynomial multiplication
+product = A * B
+
+print(f"Product: {product.print()}")
+
+# Perform polynomial division on the new polynomial
+quotient, remainder = product / A
 
 # Print the quotient and remainder
 print("Quotient:")
