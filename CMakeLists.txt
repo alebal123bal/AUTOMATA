@@ -3,10 +3,14 @@ project(Automata VERSION 1.0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# Find Python
-find_package(Python 3.11 REQUIRED COMPONENTS Interpreter Development)
+# Set output directories
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
+# Find Python 3.11
+find_package(Python3 3.11 REQUIRED COMPONENTS Interpreter Development)
 
 # Fetch pybind11
 include(FetchContent)
@@ -35,14 +39,28 @@ add_executable(automata ${SOURCES})
 pybind11_add_module(automata_bindings ${CMAKE_SOURCE_DIR}/bindings/bindings.cpp ${SOURCES})
 
 # Link against Python libraries if needed
-target_link_libraries(automata PRIVATE Python::Python)
-target_link_libraries(automata_bindings PRIVATE Python::Python)
+target_link_libraries(automata PRIVATE Python3::Python)
+target_link_libraries(automata_bindings PRIVATE Python3::Python pybind11::module)
 
 set_target_properties(automata_bindings PROPERTIES OUTPUT_NAME "automata_bindings")
+
+# Ensure the module is placed in the correct output directory
+set_target_properties(automata_bindings PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # Print some debug information
-message(STATUS "Python_EXECUTABLE: ${Python_EXECUTABLE}")
-message(STATUS "Python_INCLUDE_DIRS: ${Python_INCLUDE_DIRS}")
-message(STATUS "Python_LIBRARIES: ${Python_LIBRARIES}")
+message(STATUS "Python_EXECUTABLE: ${Python3_EXECUTABLE}")
+message(STATUS "Python_INCLUDE_DIRS: ${Python3_INCLUDE_DIRS}")
+message(STATUS "Python_LIBRARIES: ${Python3_LIBRARIES}")
+
+# Check if Python executable and libraries are found
+if(NOT Python3_EXECUTABLE)
+    message(FATAL_ERROR "Python executable not found")
+endif()
+if(NOT Python3_INCLUDE_DIRS)
+    message(FATAL_ERROR "Python include directories not found")
+endif()
+if(NOT Python3_LIBRARIES)
+    message(FATAL_ERROR "Python libraries not found")
+endif()
