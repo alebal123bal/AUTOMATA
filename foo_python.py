@@ -1,5 +1,6 @@
 import sys
 import os
+import botorch
 
 # Add the build/bin directory to the system path
 sys.path.append('/mnt/c/Users/Alessandro/OneDrive/Desktop/programs/AUTOMATA/build/bin')
