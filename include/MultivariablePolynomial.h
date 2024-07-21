@@ -43,7 +43,6 @@ public:
     //Housekeeping functions
 
     void cleanup();
-    void ordering(int lexicographic_ordering);
 
     //Numerical evalutation functions
 
@@ -54,11 +53,7 @@ public:
     void print() const;
 
 private:
-    std::vector<Monomial> generateFullMonomialSet() const;
     int findMaxCoefficient() const;
-    MultivariablePolynomial generateFactor(int max_iter, int step) const;
-    template<typename T>
-    std::vector<std::vector<T>> generateNElementSubsets(const std::vector<T>& elements, size_t n);
 };
 
 #endif // MULTIVARIABLE_POLYNOMIAL_H
