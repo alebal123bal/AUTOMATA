@@ -215,6 +215,33 @@ bool testPolynomialDivision() {
     }
 }
 
+bool testWeirdPolynomialDivision() {
+    // Create first polynomial
+    // x^5 + x^2 y^3 + 2 x^4 y^1 + 2 x^1 y^4 + 2 x^3 y^2 + y^5
+    MultivariablePolynomial poly1;
+    poly1.addMonomial(1, {5, 0});  // x^5
+    poly1.addMonomial(1, {2, 3});  // x^2 y^3
+    poly1.addMonomial(2, {2, 3});  // 2 x^4 y^1
+    poly1.addMonomial(2, {1, 4});  // 2 x^1 y^4
+    poly1.addMonomial(1, {3, 2});  // 2 x^3 y^2
+    poly1.addMonomial(1, {0, 5});  // y^5
+
+    // Create second polynomial 
+    // -8 + 2 x
+    MultivariablePolynomial poly2;
+    poly2.addMonomial(-8, {0, 0});  // -8
+    poly2.addMonomial(2, {1, 0});  // 2
+
+    // Divide the polynomials
+    std::pair<MultivariablePolynomial, MultivariablePolynomial> results = poly1 / poly2;
+
+    results.second.print();
+
+    std::cout << "testWeirdPolynomialDivision not passed." << std::endl;
+
+    return false;
+}
+
 //Now the big poly gets "created" through a big multiplication (power eventually) and then divided
 bool testPolynomialMultiplyDivide(){    
     // Start timing
