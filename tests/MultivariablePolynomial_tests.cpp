@@ -216,30 +216,42 @@ bool testPolynomialDivision() {
 }
 
 bool testWeirdPolynomialDivision() {
+    // This is correct mathematically, but the remainder grows
     // Create first polynomial
-    // x^5 + x^2 y^3 + 2 x^4 y^1 + 2 x^1 y^4 + 2 x^3 y^2 + y^5
+    // x^2 + y^2
     MultivariablePolynomial poly1;
-    poly1.addMonomial(1, {5, 0});  // x^5
-    poly1.addMonomial(1, {2, 3});  // x^2 y^3
-    poly1.addMonomial(2, {2, 3});  // 2 x^4 y^1
-    poly1.addMonomial(2, {1, 4});  // 2 x^1 y^4
-    poly1.addMonomial(1, {3, 2});  // 2 x^3 y^2
-    poly1.addMonomial(1, {0, 5});  // y^5
+    poly1.addMonomial(1, {2, 0});  // x^2
+    poly1.addMonomial(1, {0, 2});  // y^2
 
     // Create second polynomial 
     // -8 + 2 x
     MultivariablePolynomial poly2;
     poly2.addMonomial(-8, {0, 0});  // -8
-    poly2.addMonomial(2, {1, 0});  // 2
+    poly2.addMonomial(2, {1, 0});  // 2 x
 
     // Divide the polynomials
     std::pair<MultivariablePolynomial, MultivariablePolynomial> results = poly1 / poly2;
 
+    std::cout << "Quotient:" << std::endl;
+    results.first.print();
+    std::cout << std::endl << "Remainder:" << std::endl;
     results.second.print();
 
-    std::cout << "testWeirdPolynomialDivision not passed." << std::endl;
+    // Expected result 2 + 0.5 x
+    MultivariablePolynomial expected;
+    expected.addMonomial(2, {0, 0}); // 2
+    expected.addMonomial(0.5, {1, 0});  // 0.5 x
 
-    return false;
+    // Assert to check if the result matches the expected result
+    if (results.first == expected) {
+        std::cout << "testWeirdPolynomialDivision passed." << std::endl;
+        return true;
+    } else {
+        std::cout << "testWeirdPolynomialDivision failed." << std::endl;
+        return false;
+    }
+    
+    return true;
 }
 
 //Now the big poly gets "created" through a big multiplication (power eventually) and then divided
