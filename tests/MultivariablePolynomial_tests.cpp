@@ -232,11 +232,6 @@ bool testWeirdPolynomialDivision() {
     // Divide the polynomials
     std::pair<MultivariablePolynomial, MultivariablePolynomial> results = poly1 / poly2;
 
-    std::cout << "Quotient:" << std::endl;
-    results.first.print();
-    std::cout << std::endl << "Remainder:" << std::endl;
-    results.second.print();
-
     // Expected result 2 + 0.5 x
     MultivariablePolynomial expected;
     expected.addMonomial(2, {0, 0}); // 2
@@ -250,7 +245,7 @@ bool testWeirdPolynomialDivision() {
         std::cout << "testWeirdPolynomialDivision failed." << std::endl;
         return false;
     }
-    
+
     return true;
 }
 
