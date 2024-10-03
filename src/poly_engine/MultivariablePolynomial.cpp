@@ -145,7 +145,7 @@ std::pair<MultivariablePolynomial, MultivariablePolynomial> MultivariablePolynom
 
     // Iterate each monomial of the Polynomial
     size_t iteration_count = 0;
-    const size_t max_iterations = 100000; // TODO: move to math constants
+    const size_t max_iterations = 1000; // TODO: move to math constants
 
     while (!remainder.monomialVec.empty()) {
         // Check for excessive iterations
