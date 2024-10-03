@@ -18,6 +18,12 @@ MultivariablePolynomial::MultivariablePolynomial(const std::vector<Monomial>& mo
     cleanup();
 }
 
+// Copy constructor
+MultivariablePolynomial::MultivariablePolynomial(const MultivariablePolynomial& other)
+    : monomialVec(other.monomialVec) {
+    // No need to call cleanup() here as we're copying from a presumably valid polynomial
+}
+
 //This is to define the poly one Monomial at a time without an actual Monomial object
 void MultivariablePolynomial::addMonomial(double coefficient, const std::vector<int>& exponents) {
     monomialVec.push_back(Monomial(coefficient, exponents));

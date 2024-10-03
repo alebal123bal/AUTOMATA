@@ -29,6 +29,7 @@ PYBIND11_MODULE(automata_bindings, m) {
     py::class_<MultivariablePolynomial>(m, "MultivariablePolynomial")
         .def(py::init<>())
         .def(py::init<const std::vector<Monomial>&>())
+        .def(py::init<const MultivariablePolynomial&>())
         .def_readwrite("monomialVec", &MultivariablePolynomial::monomialVec)
         .def("addMonomial", static_cast<void (MultivariablePolynomial::*)(double, const std::vector<int>&)>(&MultivariablePolynomial::addMonomial))
         .def("addMonomial", static_cast<void (MultivariablePolynomial::*)(const Monomial&)>(&MultivariablePolynomial::addMonomial))
