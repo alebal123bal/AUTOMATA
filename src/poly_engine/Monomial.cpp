@@ -11,10 +11,7 @@ Monomial::Monomial() : coefficient(1.0), exponents(std::vector<int>(SYM_NUMBER, 
 
 // Implementation of the Monomial constructor
 Monomial::Monomial(double coeff, const std::vector<int>& exps) : coefficient(coeff), exponents(exps) {
-    // Ensure the exponents vector has the correct size
-    if (exps.size() != SYM_NUMBER) {
-        throw std::invalid_argument("Incorrect number of exponents provided. Expected " + std::to_string(SYM_NUMBER) + ".");
-    }
+    // Initialize Monomial with passed coefficient and exponents vector
 }
 
 //These operators can only return another Monomial, i.e. trying to add monomials with different terms, that
@@ -27,9 +24,8 @@ Monomial Monomial::operator+(const Monomial& other) const{
         // If exponents match, add the coefficients
         return Monomial(this->coefficient + other.coefficient, this->exponents);
     } else {
-        // Exponents do not match, return an error state (or handle differently if needed)
-        std::cerr << "Error: Attempted to add monomials with different terms." << std::endl;
-        return Monomial(0, {});  // Represents an invalid monomial state
+        // Exponents do not match, return an error state
+        throw std::invalid_argument("Error: Attempted to add monomials with different terms.");
     }
 }
 
@@ -39,9 +35,8 @@ Monomial Monomial::operator-(const Monomial& other) const{
         // If exponents match, add the coefficients
         return Monomial(this->coefficient - other.coefficient, this->exponents);
     } else {
-        // Exponents do not match, return an error state (or handle differently if needed)
-        std::cerr << "Error: Attempted to add monomials with different terms." << std::endl;
-        return Monomial(0, {});  // Represents an invalid monomial state
+        // Exponents do not match, return an error state
+        throw std::invalid_argument("Error: Attempted to add monomials with different terms.");
     }
 }
 
@@ -49,8 +44,14 @@ Monomial Monomial::operator*(const Monomial& other) const{
     // Multiply the coefficients
     double newCoefficient = this->coefficient * other.coefficient;
 
-    // Add the exponents; vectors are of the same length
+    // Add the exponents; vectors must have the same length
     std::vector<int> newExponents(this->exponents.size(), 0);
+
+    // Check if mulitplicand and multiplicator have the same length vector
+    if(this->exponents.size() != other.exponents.size()){ 
+        // Exponent vectors do not match in size, return an error state
+        throw std::invalid_argument("Error: exponent vectors do not match in size");
+    }
 
     for (size_t i = 0; i < this->exponents.size(); ++i) {
         newExponents[i] = this->exponents[i] + other.exponents[i];  // Directly add corresponding exponents
