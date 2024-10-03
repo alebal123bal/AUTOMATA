@@ -14,7 +14,8 @@ MultivariablePolynomial::MultivariablePolynomial(){
 }
 
 // Parametrized constructor: initialize the vector of monomials
-MultivariablePolynomial::MultivariablePolynomial(const std::vector<Monomial>& monomials): monomialVec(monomials) {
+MultivariablePolynomial::MultivariablePolynomial(const std::vector<Monomial>& monomials)
+    : monomialVec(monomials) {
     cleanup();
 }
 
@@ -120,20 +121,42 @@ MultivariablePolynomial MultivariablePolynomial::operator*(const MultivariablePo
 }
 
 //https://www.kristakingmath.com/blog/predator-prey-systems-ghtcp-5e2r4-427ab
-std::pair<MultivariablePolynomial, MultivariablePolynomial> MultivariablePolynomial::operator/(const MultivariablePolynomial& other) const{
+std::pair<MultivariablePolynomial, MultivariablePolynomial> MultivariablePolynomial::operator/(const MultivariablePolynomial& other) const {
+    // Check for division by zero
+    if (other.monomialVec.empty()) {
+        throw std::runtime_error("Division by zero polynomial");
+    }
+
     MultivariablePolynomial result;
     MultivariablePolynomial remainder = *this;
     
-    //Get the first monomial used to divide each Monomial in the long division procedure
+    // Get the first monomial used to divide each Monomial in the long division procedure
+    if (monomialVec.empty() || other.monomialVec.empty()) {
+        return std::make_pair(result, remainder);
+    }
+
     const Monomial* first = &monomialVec.back();
     const Monomial* mono1 = &other.monomialVec.back();
 
-    //Itearate each monomial of the Polynomial
+    // Check if the divisor's leading term is 1
+    if (std::abs(mono1->coefficient) < 1e-10) {
+        throw std::runtime_error("Divisor's leading coefficient is too close to zero");
+    }
+
+    // Iterate each monomial of the Polynomial
+    size_t iteration_count = 0;
+    const size_t max_iterations = 1000000; // Adjust this value as needed
+
     while (!remainder.monomialVec.empty()) {
-        //Perform Monomial division on the first Monomial
+        // Check for excessive iterations
+        if (++iteration_count > max_iterations) {
+            throw std::runtime_error("Division operation exceeded maximum allowed iterations");
+        }
+
+        // Perform Monomial division on the first Monomial
         Monomial div = *first / *mono1;
         
-        //If there is a negative exponent, then you have finished performing division
+        // If there is a negative exponent, then you have finished performing division
         bool negExp = false; 
         for (int exp : div.exponents) {
             if (exp < 0) {
@@ -141,29 +164,45 @@ std::pair<MultivariablePolynomial, MultivariablePolynomial> MultivariablePolynom
                 break;
             }
         }
-        if(negExp){
-            return std::pair(result, remainder);  //TODO: add support for remainder too
+        if (negExp) {
+            result.cleanup();
+            remainder.cleanup();
+            return std::make_pair(result, remainder);  // TODO: add support for remainder too
         }
 
-        //Push it to the result
+        // Push it to the result
         result.addMonomial(div);
 
-        //Multiply each dividend's ("other") Monomial by div
-        //I need a new Polynomial
+        // Multiply each dividend's ("other") Monomial by div
+        // I need a new Polynomial
         MultivariablePolynomial div_to_poly({div});
-        //Perform multiplication
+        // Perform multiplication
         MultivariablePolynomial prod = other * div_to_poly;
-        //Perform difference
+        // Perform difference
         remainder = remainder - prod;
-        //Pick last, as they are already ordered by cleanup but I need it backwards.
+
+        // Cleanup the remainder after subtraction
+        remainder.cleanup();
+
+        // Check if remainder became empty after subtraction and cleanup
+        if (remainder.monomialVec.empty()) {
+            break;
+        }
+
+        // Pick last, as they are already ordered by cleanup but I need it backwards.
         first = &remainder.monomialVec.back();
+
+        // Check for potential infinite loop due to numerical instability
+        if (std::abs(first->coefficient) < 1e-10) {
+            throw std::runtime_error("Remainder's leading coefficient is too close to zero, possible numerical instability");
+        }
     }
 
     // Perform a cleanup of results
     result.cleanup();
     remainder.cleanup();
 
-    return std::pair(result, remainder);
+    return std::make_pair(result, remainder);
 }
 
 MultivariablePolynomial MultivariablePolynomial::pow(int exponent) const {
