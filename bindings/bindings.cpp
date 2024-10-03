@@ -38,9 +38,8 @@ PYBIND11_MODULE(automata_bindings, m) {
         .def("__truediv__", &MultivariablePolynomial::operator/)
         .def("pow", &MultivariablePolynomial::pow)
         .def("__eq__", &MultivariablePolynomial::operator==)
-        .def("isPureCoefficientPoly", &MultivariablePolynomial::isPureCoefficientPoly)
         .def("cleanup", &MultivariablePolynomial::cleanup)
-        //.def("ordering", &MultivariablePolynomial::ordering)
         .def("eval", &MultivariablePolynomial::eval)
-        .def("print", &MultivariablePolynomial::print);
+        .def("print", &MultivariablePolynomial::print)
+        .def("isPureCoefficientPoly", &MultivariablePolynomial::isPureCoefficientPoly);
 }
