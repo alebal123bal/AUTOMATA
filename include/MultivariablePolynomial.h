@@ -16,6 +16,7 @@ public:
 
     MultivariablePolynomial();  // Default constructor initialized empty
     MultivariablePolynomial(const std::vector<Monomial>& monomials);  // Parametrized constructor
+    // TODO: add copy constructor
     
     //Polynomial construction and definition functions
 
