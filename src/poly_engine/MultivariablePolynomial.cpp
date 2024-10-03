@@ -8,9 +8,9 @@
 #include <functional>
 
 
-// Default constructor
-MultivariablePolynomial::MultivariablePolynomial() {
-    //Do nothing
+// Default constructor: create an empty polynomial
+MultivariablePolynomial::MultivariablePolynomial(){
+    
 }
 
 // Parametrized constructor: initialize the vector of monomials
@@ -189,6 +189,9 @@ MultivariablePolynomial MultivariablePolynomial::pow(int exponent) const {
         base = base * base;        // Square the base
         exponent /= 2;             // Divide exponent by 2
     }
+
+    // Perform cleanup
+    result.cleanup();
 
     return result;
 }
