@@ -237,8 +237,12 @@ bool testWeirdPolynomialDivision() {
     expected.addMonomial(2, {0, 0}); // 2
     expected.addMonomial(0.5, {1, 0});  // 0.5 x
 
+    // Vector for evaluation
+    std::vector<double> val_v = {11, 12};
+
     // Assert to check if the result matches the expected result
-    if (results.first == expected) {
+    if (results.first.eval(val_v) * poly2.eval(val_v) + results.second.eval(val_v) == poly1.eval(val_v)
+    && results.first == expected) {
         std::cout << "testWeirdPolynomialDivision passed." << std::endl;
         return true;
     } else {
