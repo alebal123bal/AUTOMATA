@@ -153,6 +153,10 @@ std::pair<MultivariablePolynomial, MultivariablePolynomial> MultivariablePolynom
         first = &remainder.monomialVec.back();
     }
 
+    // Perform a cleanup of results
+    result.cleanup();
+    remainder.cleanup();
+
     return std::pair(result, remainder);
 }
 
