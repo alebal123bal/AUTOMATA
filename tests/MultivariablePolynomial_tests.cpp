@@ -220,13 +220,13 @@ bool testWeirdPolynomialDivision() {
     // Create first polynomial
     // x^2 + y^2
     MultivariablePolynomial poly1;
-    poly1.addMonomial(1, {2, 0});  // x^2
-    poly1.addMonomial(1, {0, 2});  // y^2
+    poly1.addMonomial(5.2, {2, 0});  // x^2
+    poly1.addMonomial(13.7, {0, 7});  // y^7
 
     // Create second polynomial 
     // -8 + 2 x
     MultivariablePolynomial poly2;
-    poly2.addMonomial(-8, {0, 0});  // -8
+    poly2.addMonomial(-8.56, {0, 0});  // -8.56
     poly2.addMonomial(2, {1, 0});  // 2 x
 
     // Divide the polynomials
