@@ -18,7 +18,7 @@ MultivariablePolynomial::MultivariablePolynomial(const std::vector<Monomial>& mo
     cleanup();
 }
 
-//This is to define the poly one Monomial at a time
+//This is to define the poly one Monomial at a time without an actual Monomial object
 void MultivariablePolynomial::addMonomial(double coefficient, const std::vector<int>& exponents) {
     monomialVec.push_back(Monomial(coefficient, exponents));
     cleanup();
