@@ -77,6 +77,12 @@ Monomial Monomial::operator/(const Monomial& other) const{
     // Sub the exponents; vectors are of the same length
     std::vector<int> newExponents(this->exponents.size(), 0);
 
+    // Check if mulitplicand and multiplicator have the same length vector
+    if(this->exponents.size() != other.exponents.size()){ 
+        // Exponent vectors do not match in size, return an error state
+        throw std::invalid_argument("Error: exponent vectors do not match in size");
+    }
+    
     for (size_t i = 0; i < this->exponents.size(); ++i) {
         newExponents[i] = this->exponents[i] - other.exponents[i];  // Directly sub corresponding exponents
     }
