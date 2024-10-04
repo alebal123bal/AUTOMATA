@@ -1,5 +1,7 @@
 # AUTOMATA
 
+Efficient Polynomial manipulation library
+
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
