@@ -191,11 +191,6 @@ std::pair<MultivariablePolynomial, MultivariablePolynomial> MultivariablePolynom
 
         // Pick last, as they are already ordered by cleanup but I need it backwards.
         first = &remainder.monomialVec.back();
-
-        // Check for potential infinite loop due to numerical instability
-        if (std::abs(first->coefficient) < 1e-10) {
-            throw std::runtime_error("Remainder's leading coefficient is too close to zero, possible numerical instability");
-        }
     }
 
     // Perform a cleanup of results
