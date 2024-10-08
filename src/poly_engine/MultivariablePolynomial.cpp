@@ -147,6 +147,8 @@ std::pair<MultivariablePolynomial, MultivariablePolynomial> MultivariablePolynom
     size_t iteration_count = 0;
     const size_t max_iterations = 1000; // TODO: move to math constants
 
+    // TODO: this can lead to many unnecessary iterations and assumes perfect divisor
+    // Looks like a better N_max is given by monomialVec.size() - other.monomialVec.size()
     while (!remainder.monomialVec.empty()) {
         // Check for excessive iterations
         if (++iteration_count > max_iterations) {
@@ -154,7 +156,7 @@ std::pair<MultivariablePolynomial, MultivariablePolynomial> MultivariablePolynom
         }
 
         // Perform Monomial division on the first Monomial
-        Monomial div = *first / *mono1;
+        Monomial div = *first / *mono1; // TODO: move this declaration outside
         
         // If there is a negative exponent, then you have finished performing division
         bool negExp = false; 
@@ -167,7 +169,7 @@ std::pair<MultivariablePolynomial, MultivariablePolynomial> MultivariablePolynom
         if (negExp) {
             result.cleanup();
             remainder.cleanup();
-            return std::make_pair(result, remainder);  // TODO: add support for remainder too
+            return std::make_pair(result, remainder);
         }
 
         // Push it to the result
@@ -175,12 +177,13 @@ std::pair<MultivariablePolynomial, MultivariablePolynomial> MultivariablePolynom
 
         // Multiply each dividend's ("other") Monomial by div
         // I need a new Polynomial
-        MultivariablePolynomial div_to_poly({div});
+        MultivariablePolynomial div_to_poly({div});  // TODO: move this declaration outside
         // Perform multiplication
-        MultivariablePolynomial prod = other * div_to_poly;
+        MultivariablePolynomial prod = other * div_to_poly;  // TODO: move this declaration outside
         // Perform difference
         remainder = remainder - prod;
 
+        // TODO: is this needed? Can you order them at the start? And then simply remove small-coefficient terms
         // Cleanup the remainder after subtraction
         remainder.cleanup();
 
