@@ -18,6 +18,8 @@ extern bool testPolynomialSubtraction();
 extern bool testPolynomialMultiplication();
 extern bool testPolynomialDivision();
 extern bool testWeirdPolynomialDivision();
+extern bool testPolynomialDivisionHuge();
+extern bool testPolynomialDivisionBottleneck();
 extern bool testPolynomialDivisionBig();
 extern bool testPolynomialDivisionSmall();
 extern bool testPolynomialDivisionNoSymbols();
@@ -51,12 +53,14 @@ int main() {
     bool advanced_2 = testPolynomialDivisionNoSymbols();
     bool advanced_3 = testPolynomialMultiplyDivide();
     bool advanced_4 = testRemainderDivision();
+    bool advanced_5 = testPolynomialDivisionHuge();
+    bool advanced_6 = testPolynomialDivisionBottleneck();
 
     //Weird operation 
     bool weird = testWeirdPolynomialDivision();
 
     // Return non-zero if any tests fail
-    bool advanced_Polynomial_tests_passed = weird && advanced_0 && advanced_1 && advanced_2 && advanced_3 && advanced_4;
+    bool advanced_Polynomial_tests_passed = weird && advanced_0 && advanced_1 && advanced_2 && advanced_3 && advanced_4 && advanced_5 && advanced_6;
 
     return Polynomial_tests_passed && advanced_Polynomial_tests_passed;
 }

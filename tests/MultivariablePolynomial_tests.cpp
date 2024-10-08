@@ -127,6 +127,66 @@ bool testPolynomialDivisionBig(){
 
 }
 
+bool testPolynomialDivisionHuge(){
+    // Create the first (dividend) polynomial: (2x + 3)^p1_exp
+    int p1_exp = 27;
+    MultivariablePolynomial poly1;
+    poly1.addMonomial(3, {0, 0});   // 3
+    poly1.addMonomial(2, {1, 0});   // 2x
+
+    // Create the divisor polynomial: (2x + 3)^(p1_exp / 3)
+    MultivariablePolynomial poly2 = MultivariablePolynomial(poly1); // Copy constructor
+    
+    // Divide the polynomials
+    std::pair<MultivariablePolynomial, MultivariablePolynomial> results = poly1.pow(p1_exp) / poly2.pow(p1_exp/3);
+
+    // Expected result
+    MultivariablePolynomial expected;
+    expected = MultivariablePolynomial(poly1.pow(p1_exp - p1_exp/ 3));
+
+    // Assert to check if the result matches the expected result
+    if (results.first == expected) {
+        std::cout << "testPolynomialDivisionHuge test passed." << std::endl;
+        return true;
+    } else {
+        std::cout << "testPolynomialDivisionHuge failed." << std::endl;
+        return false;
+    }
+
+}
+
+
+bool testPolynomialDivisionBottleneck(){
+    // Possible bottleneck for the polynomial division: the remainder is not empty immediately
+    // Divide by a non divisor
+    // Create the first (dividend) polynomial: (2x + 3)^p1_exp
+    int p1_exp = 550;
+    MultivariablePolynomial poly1;
+    poly1.addMonomial(3, {0, 0});   // 3
+    poly1.addMonomial(2, {1, 0});   // 2x
+
+    // Create the divisor polynomial: (4x + 5)^(p1_exp / 3)
+    MultivariablePolynomial poly2;
+    poly2.addMonomial(5, {0, 0});   // 5
+    poly2.addMonomial(4, {1, 0});   // 4x
+    
+    // Divide the polynomials
+    std::pair<MultivariablePolynomial, MultivariablePolynomial> results = poly1.pow(p1_exp) / poly2.pow(p1_exp/3);
+
+    // Expected result
+    MultivariablePolynomial expected;
+    expected = MultivariablePolynomial(poly1.pow(p1_exp - p1_exp/ 3));
+
+    // Assert to check if the result matches the expected result
+    if (results.first == expected) {
+        std::cout << "testPolynomialDivisionBottleneck test passed." << std::endl;
+        return true;
+    } else {
+        std::cout << "testPolynomialDivisionBottleneck failed." << std::endl;
+        return false;
+    }
+
+}
 
 bool testPolynomialDivisionSmall() {
     // Create first polynomial
